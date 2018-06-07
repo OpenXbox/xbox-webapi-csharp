@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using XboxWebApi.Extensions;
 using XboxWebApi.Authentication;
 using XboxWebApi.Authentication.Model;
 
@@ -8,17 +10,27 @@ namespace XboxWebApi.Cli
     {
         static void Main(string[] args)
         {
-			string requestUrl = AuthenticationService.GetWindowsLiveAuthenticationUrl();
+            string responseUrl;
+            string requestUrl = AuthenticationService.GetWindowsLiveAuthenticationUrl();
 
-			Console.WriteLine("1) Open following URL in your WebBrowser:\n\n{0}\n\n" +
-			                  "2) Authenticate with your Microsoft Account\n" +
-			                  "3) Paste returned URL from addressbar: \n", requestUrl);
+            if (args.Length < 1)
+            {
+                Console.WriteLine("1) Open following URL in your WebBrowser:\n\n{0}\n\n" +
+                                    "2) Authenticate with your Microsoft Account\n" +
+                                    "3) Paste returned URL from addressbar: \n", requestUrl);
 
-			string responseUrl = Console.ReadLine();
-			WindowsLiveResponse response = AuthenticationService.ParseWindowsLiveResponse(responseUrl);
+                // Caveat: Console.ReadLine() is limited to 254 chars on Windows
+                responseUrl = Console.ReadLine();
+            }
+            else
+            {
+                responseUrl = args[0];
+            }
 
-			AuthenticationService authenticator = new AuthenticationService(
-				new AccessToken(response), new RefreshToken(response));
+            WindowsLiveResponse response = AuthenticationService.ParseWindowsLiveResponse(responseUrl);
+
+            AuthenticationService authenticator = new AuthenticationService(
+                new AccessToken(response), new RefreshToken(response));
 
             bool success = authenticator.Authenticate();
             if (!success)
