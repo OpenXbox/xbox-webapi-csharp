@@ -33,6 +33,63 @@ Console.WriteLine(authenticator.XToken);
 Console.WriteLine(authenticator.UserInformation);
 ```
 
+Save token to JSON
+
+```cs
+using System.IO;
+using XboxWebApi.Common;
+
+string xtoken_json = NewtonsoftJsonSerializer.Default.Serialize(authenticator.XToken);
+string refresh_json = NewtonsoftJsonSerializer.Default.Serialize(authenticator.RefreshToken);
+File.WriteAllText("xtoken.json", json);
+File.WriteAllText("refresh_token.json", json);
+```
+
+Load token from JSON
+
+```cs
+using System.IO;
+using XboxWebApi.Common;
+using XboxWebApi.Authentication;
+
+string xtoken_json = File.ReadAllText("xtoken.json");
+string refresh_json = File.ReadAllText("refresh_token.json");
+XToken xtoken = NewtonsoftJsonSerializer.Default.Deserialize<XToken>(xtoken_json);
+RefreshToken refresh_token = NewtonsoftJsonSerializer.Default.Deserialize<RefreshToken>(refresh_json);
+```
+
+Example Api Usage
+
+```cs
+using System;
+using XboxWebApi.Common;
+using XboxWebApi.Extensions;
+using XboxWebApi.Services;
+using XboxWebApi.Services.Api;
+using XboxWebApi.Services.Model;
+
+if (!xtoken.Valid)
+{
+    Console.WriteLine("Token expired, please refresh / reauthenticate");
+    return;
+}
+
+XblConfiguration xblConfig = new XblConfiguration(xtoken.UserInformation,
+    xtoken, XblLanguage.United_States);
+
+PresenceService presenceService = new PresenceService(xblConfig);
+PeopleService peopleService = new PeopleService(xblConfig);
+MessageService messageService = new MessageService(xblConfig);
+// ... more services
+
+var friends = peopleService.GetFriends();
+var presenceBatch = presenceService.GetPresenceBatch(friends.GetXuids());
+for (int i=0; i < friends.TotalCount; i++)
+{
+    Console.WriteLine($"{presenceBatch[i].Xuid} is {presenceBatch[i].State}");
+}
+```
+
 ## Documentation
 
 Not yet, please look at `XboxWebApi.Tests` for now.
