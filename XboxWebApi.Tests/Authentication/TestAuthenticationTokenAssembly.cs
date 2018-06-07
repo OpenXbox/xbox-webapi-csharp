@@ -2,35 +2,30 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using NUnit.Framework;
+using XboxWebApi.Common;
 using XboxWebApi.Authentication;
 using XboxWebApi.Authentication.Model;
 
 namespace XboxWebApi.UnitTests.Authentication
 {
     [TestFixture]
-    public class TestAuthenticationTokenAssembly
+    public class TestAuthenticationTokenAssembly : TestDataProvider
     {
         public TestAuthenticationTokenAssembly()
+            : base("Authentication")
         {
         }
 
         [Test]
         public void AssembleToken()
         {
-            string content = "{\"IssueInstant\":\"2014-09-20T18:41:08.0602402Z\"," +
-                              "\"NotAfter\":\"2014-09-21T18:41:08.0602402Z\"," +
-                              "\"Token\":\"eyWTF/bdf+sd34ji234kasdf34asfs==\"," +
-                              "\"DisplayClaims\":{\"xui\":[{\"agg\":\"Adult\"," +
-                              "\"gtg\":\"xboxWebapiGamertag\"," +
-                              "\"prv\":\"191 193 196 199 200 201\"," +
-                              "\"xid\":\"234568092345979\"," +
-                              "\"uhs\":\"162358993400365622\"," +
-                              "\"usr\":\"123\"}]}}";
-            XASResponse xasResponse = XASResponse.FromJson(content);
+            string content = TestData["XTokenValid.json"];
+            XASResponse xasResponse = NewtonsoftJsonSerializer.Default
+                .Deserialize<XASResponse>(content);
             XToken token = new XToken(xasResponse);
 
             Assert.AreEqual(token.Issued, new DateTime(2014, 9, 20, 18, 41, 8).AddTicks(602402));
-            Assert.AreEqual(token.Expires, new DateTime(2014, 9, 21, 18, 41, 8).AddTicks(602402));
+            Assert.AreEqual(token.Expires, new DateTime(2099, 9, 21, 18, 41, 8).AddTicks(602402));
             Assert.AreEqual(token.Jwt, "eyWTF/bdf+sd34ji234kasdf34asfs==");
             Assert.IsNotNull(token.UserInformation);
 

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace XboxWebApi.Authentication.Model
 {
-    public partial class XASTRequest
+    public class XASTRequest
     {
 		public string RelyingParty { get; internal set; }
         public string TokenType { get; internal set; }
@@ -33,19 +33,5 @@ namespace XboxWebApi.Authentication.Model
         public string DeviceToken { get; internal set; }
         public string SiteName { get; internal set; }
         public string RpsTicket { get; internal set; }
-    }
-    
-	public partial class XASTRequest
-    {
-        public static XASTRequest FromJson(string json) =>
-            JsonConvert.DeserializeObject<XASTRequest>(
-                json, Common.JsonSetting.StandardSetting());
-    }
-
-    public static class XASTSerialize
-    {
-        public static string ToJson(this XASTRequest self) =>
-            JsonConvert.SerializeObject(
-                self, Common.JsonSetting.StandardSetting());
     }
 }

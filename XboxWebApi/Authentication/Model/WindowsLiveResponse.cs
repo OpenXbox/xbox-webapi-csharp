@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Specialized;
 using Newtonsoft.Json;
+using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Authentication.Model
 {
-	public partial class WindowsLiveResponse
+	public class WindowsLiveResponse : IStringable
 	{        
 		public string AccessToken;
 		public int ExpiresIn;
@@ -31,12 +32,5 @@ namespace XboxWebApi.Authentication.Model
 			RefreshToken = queryParams["refresh_token"];
 			UserId = queryParams["user_id"];         
 		}
-	}
-
-	public partial class WindowsLiveResponse
-	{
-		public static WindowsLiveResponse FromJson(string json) =>
-		    JsonConvert.DeserializeObject<WindowsLiveResponse>(
-			    json, Common.JsonSetting.SnakeCaseSetting());
 	}
 }

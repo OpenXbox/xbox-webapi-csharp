@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using RestSharp;
 using Newtonsoft.Json;
 using XboxWebApi.Common;
+using XboxWebApi.Extensions;
 using XboxWebApi.Authentication.Model;
 
 namespace XboxWebApi.Authentication
@@ -38,101 +39,66 @@ namespace XboxWebApi.Authentication
 		public static WindowsLiveResponse RefreshLiveToken(
 			RefreshToken refreshToken)
 		{
-			RestClient client = new RestClient("https://login.live.com");
-			RestRequest request = new RestRequest("oauth20_token.srf", Method.GET);
+			RestClientEx client = new RestClientEx("https://login.live.com",
+				JsonNamingStrategy.SnakeCase);
+			RestRequestEx request = new RestRequestEx("oauth20_token.srf", Method.GET);
 			NameValueCollection nv = new Model.WindowsLiveRefreshQuery(refreshToken).GetQuery();
-
-			foreach (string key in nv)
-            {
-				request.AddQueryParameter(key, nv[key]);            
-            }
-			IRestResponse response = client.Execute(request);
-			if (!response.IsSuccessful)
-			{
-				throw new ApiException("RefreshLiveToken failed", response);
-			}
-
-			return WindowsLiveResponse.FromJson(response.Content);
+			request.AddQueryParameters(nv);
+			IRestResponse<WindowsLiveResponse> response = client.Execute<WindowsLiveResponse>(request);
+			return response.Data;
 		}
 
 		public static UserToken AuthenticateXASU(AccessToken accessToken)
 		{
-			RestClient client = new RestClient("https://user.auth.xboxlive.com");
-			RestRequest request = new RestRequest("user/authenticate", Method.POST);
+			RestClientEx client = new RestClientEx("https://user.auth.xboxlive.com");
+			RestRequestEx request = new RestRequestEx("user/authenticate", Method.POST);
 			request.AddHeader("x-xbl-contract-version", "1");
 			request.AddJsonBody(new XASURequest(accessToken));
-			IRestResponse response = client.Execute(request);
-
-			if (!response.IsSuccessful)
-            {
-                throw new ApiException("AuthenticateXASU failed", response);
-            }
-			XASResponse xasResp = XASResponse.FromJson(response.Content);
-			return new UserToken(xasResp);
+			IRestResponse<XASResponse> response = client.Execute<XASResponse>(request);
+			return new UserToken(response.Data);
 		}
 
 		public static DeviceToken AuthenticateXASD(AccessToken accessToken)
 		{
-			RestClient client = new RestClient("https://device.auth.xboxlive.com");
-			RestRequest request = new RestRequest("device/authenticate", Method.POST);
+			RestClientEx client = new RestClientEx("https://device.auth.xboxlive.com");
+			RestRequestEx request = new RestRequestEx("device/authenticate", Method.POST);
             request.AddHeader("x-xbl-contract-version", "1");
             request.AddJsonBody(new XASDRequest(accessToken));
-            IRestResponse response = client.Execute(request);
-			if (!response.IsSuccessful)
-            {
-                throw new ApiException("AuthenticateXASD failed", response);
-            }
-
-			XASResponse xasResp = XASResponse.FromJson(response.Content);
-            return new DeviceToken(xasResp);
+			IRestResponse<XASResponse> response = client.Execute<XASResponse>(request);
+            return new DeviceToken(response.Data);
 		}
         
 		public static TitleToken AuthenticateXAST(AccessToken accessToken,
 		                                          DeviceToken deviceToken)
 		{
-			RestClient client = new RestClient("https://title.auth.xboxlive.com");
-            RestRequest request = new RestRequest("title/authenticate", Method.POST);
+			RestClientEx client = new RestClientEx("https://title.auth.xboxlive.com");
+            RestRequestEx request = new RestRequestEx("title/authenticate", Method.POST);
             request.AddHeader("x-xbl-contract-version", "1");
 			request.AddJsonBody(new XASTRequest(accessToken, deviceToken));
-            IRestResponse response = client.Execute(request);
-			if (!response.IsSuccessful)
-            {
-                throw new ApiException("AuthenticateXAST failed", response);
-            }
-
-			XASResponse xasResp = XASResponse.FromJson(response.Content);
-            return new TitleToken(xasResp);
+			IRestResponse<XASResponse> response = client.Execute<XASResponse>(request);
+            return new TitleToken(response.Data);
 		}
 
 		public static XToken AuthenticateXSTS(UserToken userToken,
 		                                      DeviceToken deviceToken=null,
 		                                      TitleToken titleToken=null)
 		{
-			RestClient client = new RestClient("https://xsts.auth.xboxlive.com");
-			RestRequest request = new RestRequest("xsts/authorize", Method.POST);
+			RestClientEx client = new RestClientEx("https://xsts.auth.xboxlive.com");
+			RestRequestEx request = new RestRequestEx("xsts/authorize", Method.POST);
             request.AddHeader("x-xbl-contract-version", "1");
 			request.AddJsonBody(new XSTSRequest(userToken,
                                                 deviceToken: deviceToken,
                                                 titleToken: titleToken));
-            IRestResponse response = client.Execute(request);
-			if (!response.IsSuccessful)
-            {
-                throw new ApiException("AuthenticateXSTS failed", response);
-            }
-
-			XASResponse xasResp = XASResponse.FromJson(response.Content);
-            return new XToken(xasResp);
+			IRestResponse<XASResponse> response = client.Execute<XASResponse>(request);
+            return new XToken(response.Data);
 		}
         
 		public static string GetWindowsLiveAuthenticationUrl()
 		{
-			var client = new RestClient("https://login.live.com");
-			var request = new RestRequest("oauth20_authorize.srf", Method.GET);
-			var nv = new Model.WindowsLiveAuthenticationQuery().GetQuery();
-			foreach (string key in nv)
-            {
-                request.AddQueryParameter(key, nv[key]);
-            }
+			RestClientEx client = new RestClientEx("https://login.live.com");
+			RestRequestEx request = new RestRequestEx("oauth20_authorize.srf", Method.GET);
+			NameValueCollection nv = new Model.WindowsLiveAuthenticationQuery().GetQuery();
+			request.AddQueryParameters(nv);
 			return client.BuildUri(request).ToString();
 		}
 

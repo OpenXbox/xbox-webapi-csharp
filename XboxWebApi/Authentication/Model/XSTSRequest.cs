@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace XboxWebApi.Authentication.Model
 {
-    public partial class XSTSRequest
+    public class XSTSRequest
     {
 		public string RelyingParty { get; internal set; }
         public string TokenType { get; internal set; }
@@ -21,7 +21,7 @@ namespace XboxWebApi.Authentication.Model
 			TokenType = tokenType;
 			Properties = new Dictionary<string, object>
 			{
-				{"UserTokens", new List<string>(){userToken.Jwt}},
+				{"UserTokens", new string[]{userToken.Jwt}},
 				{"SandboxId", sandboxId}
 			};
             
@@ -35,19 +35,5 @@ namespace XboxWebApi.Authentication.Model
 				Properties.Add("TitleToken", titleToken.Jwt);
 			}
         }
-    }
-
-	public partial class XSTSRequest
-    {
-        public static XSTSRequest FromJson(string json) =>
-            JsonConvert.DeserializeObject<XSTSRequest>(
-                json, Common.JsonSetting.StandardSetting());
-    }
-
-	public static class XSTSSerialize
-	{
-		public static string ToJson(this XSTSRequest self) =>
-			JsonConvert.SerializeObject(
-			self, Common.JsonSetting.StandardSetting());
     }
 }

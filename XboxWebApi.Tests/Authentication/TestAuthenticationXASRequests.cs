@@ -1,55 +1,50 @@
 using NUnit.Framework;
+using XboxWebApi.Common;
 using XboxWebApi.Authentication;
 using XboxWebApi.Authentication.Model;
 
 namespace XboxWebApi.UnitTests.Authentication
 {
     [TestFixture]
-    public class TestAuthenticationXASRequests
+    public class TestAuthenticationXASRequests : TestDataProvider
     {
         public TestAuthenticationXASRequests()
+            : base("Authentication")
         {
         }
 
         [Test]
         public void CreateRequestXASU()
         {
+            string expect = TestData["XASURequestBody.json"];
             AccessToken token = new AccessToken()
             {
                 Jwt = "eWaoksdijsdfeefes"
             };
             XASURequest request = new XASURequest(token);
-            string body = request.ToJson();
+            string body = NewtonsoftJsonSerializer.Default.Serialize(request);
 
-            Assert.AreEqual(body, "{\"RelyingParty\":\"http://auth.xboxlive.com\"," +
-                                  "\"TokenType\":\"JWT\"," +
-                                  "\"Properties\":{" +
-                                  "\"AuthMethod\":\"RPS\"," +
-                                  "\"SiteName\":\"user.auth.xboxlive.com\"," +
-                                  "\"RpsTicket\":\"eWaoksdijsdfeefes\"}}");
+            Assert.AreEqual(body, expect);
         }
 
         [Test]
         public void CreateRequestXASD()
         {
+            string expect = TestData["XASDRequestBody.json"];
             AccessToken token = new AccessToken()
             {
                 Jwt = "eWaoksdijsdfeefes"
             };
             XASDRequest request = new XASDRequest(token);
-            string body = request.ToJson();
+            string body = NewtonsoftJsonSerializer.Default.Serialize(request);
 
-            Assert.AreEqual(body, "{\"RelyingParty\":\"http://auth.xboxlive.com\"," +
-                                  "\"TokenType\":\"JWT\"," +
-                                  "\"Properties\":{" +
-                                  "\"AuthMethod\":\"RPS\"," +
-                                  "\"SiteName\":\"user.auth.xboxlive.com\"," +
-                                  "\"RpsTicket\":\"eWaoksdijsdfeefes\"}}");
+            Assert.AreEqual(body, expect);
         }
 
         [Test]
         public void CreateRequestXAST()
         {
+            string expect = TestData["XASTRequestBody.json"];
             AccessToken accessToken = new AccessToken()
             {
                 Jwt = "eWaoksdijsdfeefes"
@@ -59,32 +54,23 @@ namespace XboxWebApi.UnitTests.Authentication
                 Jwt = "eyajiwjafiassssaw"
             };
             XASTRequest request = new XASTRequest(accessToken, deviceToken);
-            string body = request.ToJson();
+            string body = NewtonsoftJsonSerializer.Default.Serialize(request);
 
-            Assert.AreEqual(body, "{\"RelyingParty\":\"http://auth.xboxlive.com\"," +
-                                  "\"TokenType\":\"JWT\"," +
-                                  "\"Properties\":{" +
-                                  "\"AuthMethod\":\"RPS\"," +
-                                  "\"DeviceToken\":\"eyajiwjafiassssaw\"," +
-                                  "\"SiteName\":\"user.auth.xboxlive.com\"," +
-                                  "\"RpsTicket\":\"eWaoksdijsdfeefes\"}}");
+            Assert.AreEqual(body, expect);
         }
 
         [Test]
         public void CreateRequestXSTS()
         {
+            string expect = TestData["XSTSRequestBody.json"];
             UserToken token = new UserToken()
             {
                 Jwt = "eWaoksdijsdfeefes"
             };
             XSTSRequest request = new XSTSRequest(token);
-            string body = request.ToJson();
+            string body = NewtonsoftJsonSerializer.Default.Serialize(request);
 
-            Assert.AreEqual(body, "{\"RelyingParty\":\"http://xboxlive.com\"," +
-                                  "\"TokenType\":\"JWT\"," +
-                                  "\"Properties\":{" +
-                                  "\"UserTokens\":[\"eWaoksdijsdfeefes\"]," +
-                                  "\"SandboxId\":\"RETAIL\"}}");
+            Assert.AreEqual(body, expect);
         }
     }
 }

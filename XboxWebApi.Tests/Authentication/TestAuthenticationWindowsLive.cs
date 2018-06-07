@@ -6,22 +6,17 @@ using XboxWebApi.Authentication.Model;
 namespace XboxWebApi.UnitTests.Authentication
 {
     [TestFixture]
-    public class TestAuthenticationWindowsLive
+    public class TestAuthenticationWindowsLive : TestDataProvider
     {
         public TestAuthenticationWindowsLive()
+            : base("Authentication")
         {
         }
 
         [Test]
         public void GenerateWindowsLiveAuthenticationUrl()
         {
-            string expectedUrl = "https://login.live.com/oauth20_authorize.srf?" +
-                                 "response_type=token" +
-                                 "&scope=service::user.auth.xboxlive.com::MBI_SSL" +
-                                 "&redirect_uri=https:%2f%2flogin.live.com%2foauth20_desktop.srf" +
-                                 "&client_id=0000000048093EE3" +
-                                 "&display=touch" +
-                                 "&locale=en";
+            string expectedUrl = TestData["WindowsLiveAuthUrl.url"];
             string authenticationUrl = AuthenticationService.GetWindowsLiveAuthenticationUrl();
 
             Assert.AreEqual(authenticationUrl, expectedUrl);
@@ -30,15 +25,8 @@ namespace XboxWebApi.UnitTests.Authentication
         [Test]
         public void ParseWindowsLiveResponseSuccess()
         {
+            string responseUrl = TestData["WindowsLiveRedirectionUrl.url"];
             System.DateTime dateBeforeParsing = System.DateTime.Now;
-            string responseUrl = "https://login.live.com/oauth20_desktop.srf?" +
-                                 "lc=1033" +
-                                 "#access_token=EwAAA%2bpvBAAUKods63Ys1fGlwiccIFJ%2b9u" +
-                                 "&token_type=bearer" +
-                                 "&expires_in=86400" +
-                                 "&scope=service::user.auth.xboxlive.com::MBI_SSL" +
-                                 "&refresh_token=MCdhvIzN1f!FoKyCigwGbM%24%24" +
-                                 "&user_id=100abefbdea232";
             WindowsLiveResponse response = AuthenticationService.ParseWindowsLiveResponse(responseUrl);
 
             Assert.IsNotNull(response);

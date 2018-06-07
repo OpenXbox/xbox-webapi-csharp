@@ -2,15 +2,17 @@ using System;
 using System.IO;
 using System.Collections.Specialized;
 using NUnit.Framework;
+using XboxWebApi.Common;
 using XboxWebApi.Authentication;
 using XboxWebApi.Authentication.Model;
 
 namespace XboxWebApi.UnitTests.Authentication
 {
     [TestFixture]
-    public class TestRefreshTokenWindowsLive
+    public class TestRefreshTokenWindowsLive : TestDataProvider
     {
         public TestRefreshTokenWindowsLive()
+            : base("Authentication")
         {
         }
 
@@ -50,12 +52,9 @@ namespace XboxWebApi.UnitTests.Authentication
         [Test]
         public void ParseValidRefreshToken()
         {
-            string content = "{\"token_type\":\"bearer\",\"expires_in\":86400," +
-                              "\"scope\":\"service::user.auth.xboxlive.com::MBI_SSL\"," +
-                              "\"access_token\":\"EWCAA/bdf+sd34ji234kasdf34asfs==\"," +
-                              "\"refresh_token\":\"CuZ*4TX7!SAF33cW*kzdFLPRcz0DtU$$\"," +
-                              "\"user_id\":\"a42bdc501731723e\"}";
-            WindowsLiveResponse response = WindowsLiveResponse.FromJson(content);
+            string content = TestData["RefreshToken.json"];
+            WindowsLiveResponse response = NewtonsoftJsonSerializer.Create(JsonNamingStrategy.SnakeCase)
+                .Deserialize<WindowsLiveResponse>(content);
 
             Assert.AreEqual(response.TokenType, "bearer");
             Assert.AreEqual(response.ExpiresIn, 86400);
@@ -68,8 +67,9 @@ namespace XboxWebApi.UnitTests.Authentication
         [Test]
         public void ParseInvalidRefreshToken()
         {
-            string content = "{\"error\":\"Some error occured\"}";
-            WindowsLiveResponse response = WindowsLiveResponse.FromJson(content);
+            string content = TestData["InvalidData.json"];
+            WindowsLiveResponse response = NewtonsoftJsonSerializer.Create(JsonNamingStrategy.SnakeCase)
+                .Deserialize<WindowsLiveResponse>(content);
 
             Assert.AreEqual(response.ExpiresIn, 0);
             Assert.IsNull(response.TokenType);

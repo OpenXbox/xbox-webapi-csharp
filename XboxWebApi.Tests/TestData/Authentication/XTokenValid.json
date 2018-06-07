@@ -1,0 +1,17 @@
+{
+  "NotAfter": "2099-09-21T18:41:08.0602402Z",
+  "IssueInstant": "2014-09-20T18:41:08.0602402Z",
+  "Token": "eyWTF/bdf+sd34ji234kasdf34asfs==",
+  "DisplayClaims": {
+    "xui": [
+      {
+        "gtg": "xboxWebapiGamertag",
+        "uhs": "162358993400365622",
+        "xid": "234568092345979",
+        "prv": "191 193 196 199 200 201",
+        "usr": "123",
+        "agg": "Adult"
+      }
+    ]
+  }
+}
