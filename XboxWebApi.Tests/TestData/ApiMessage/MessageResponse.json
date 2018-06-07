@@ -1,0 +1,27 @@
+{
+    "header": {
+      "senderXuid": 0,
+      "sender": "Xbox Live",
+      "sent": "2017-06-09T19:01:59Z",
+      "expiration": "2017-07-09T19:01:59Z",
+      "messageType": "Service",
+      "hasText": true,
+      "hasPhoto": false,
+      "hasAudio": false,
+      "messageFolderType": "Inbox"
+    },
+    "messageText": "Here is some full message text, no cut-off text",
+    "attachmentId": null,
+    "attachment": null,
+    "actions": [
+      {
+        "id": 0,
+        "vuiGui": "Launch website",
+        "vuiAlm": null,
+        "vuiPron": null,
+        "vuiConf": null,
+        "launch": "https://xbox.com",
+        "launchType": "DeepLink"
+      }
+    ]
+  }

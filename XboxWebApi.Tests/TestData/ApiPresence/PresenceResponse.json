@@ -1,0 +1,18 @@
+{
+    "devices": [
+      {
+        "type": "WindowsOneCore",
+        "titles": [
+          {
+            "id": "328178078",
+            "placement": "Full",
+            "name": "Xbox App",
+            "lastModified": "2018-06-06T19:55:10.512599Z",
+            "state": "Active"
+          }
+        ]
+      }
+    ],
+    "xuid": "2580478784034343",
+    "state": "Online"
+  }

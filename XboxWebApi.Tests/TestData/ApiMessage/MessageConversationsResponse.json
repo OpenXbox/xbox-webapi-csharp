@@ -1,0 +1,59 @@
+{
+    "results": [
+      {
+        "senderXuid": "0",
+        "senderGamerTag": "Xbox Live",
+        "lastUpdated": "2018-06-06T20:32:26.407Z",
+        "lastSent": "2018-06-05T02:24:53.27Z",
+        "messageCount": 14,
+        "unreadMessageCount": 0,
+        "lastMessage": {
+          "messageId": 1233,
+          "senderTitleId": 0,
+          "senderXuid": "0",
+          "senderGamerTag": "Xbox Live",
+          "sentTime": "2018-06-05T02:24:53Z",
+          "lastUpdateTime": "0001-01-01T00:00:00",
+          "messageType": "Service",
+          "messageFolder": "Inbox",
+          "isRead": true,
+          "hasPhoto": false,
+          "hasAudio": false,
+          "messageText": "Important service message...",
+          "actions": [
+            {
+              "id": 0,
+              "vuiGui": "Launch website",
+              "vuiAlm": null,
+              "vuiPron": null,
+              "vuiConf": null,
+              "launch": "https://xboxlive.com",
+              "launchType": "DeepLink"
+            }
+          ]
+        }
+      },
+      {
+        "senderXuid": "2508565379774180",
+        "senderGamerTag": "Some Gamertag",
+        "lastUpdated": "2018-05-30T20:45:58.83Z",
+        "lastSent": "2018-05-30T20:45:58.713Z",
+        "messageCount": 2,
+        "unreadMessageCount": 0,
+        "lastMessage": {
+          "messageId": 1232,
+          "senderTitleId": 0,
+          "senderXuid": "2508565379774180",
+          "senderGamerTag": "Some Gamertag",
+          "sentTime": "2018-05-30T20:45:58Z",
+          "lastUpdateTime": "0001-01-01T00:00:00",
+          "messageType": "User",
+          "messageFolder": "SentItems",
+          "isRead": true,
+          "hasPhoto": false,
+          "hasAudio": false,
+          "messageText": "Yes, thank you"
+        }
+      }
+    ]
+  }

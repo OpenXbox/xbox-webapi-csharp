@@ -1,0 +1,41 @@
+[
+    {
+      "xuid": "2580478784034343",
+      "state": "Offline"
+    },
+    {
+      "devices": [
+        {
+          "type": "XboxOne",
+          "titles": [
+            {
+              "id": "750323071",
+              "placement": "Background",
+              "name": "Home",
+              "lastModified": "2018-06-06T19:38:14.0770062Z",
+              "state": "Active"
+            },
+            {
+              "id": "122001257",
+              "placement": "Full",
+              "name": "YouTube",
+              "lastModified": "2018-06-06T19:38:14.0770062Z",
+              "state": "Active"
+            }
+          ]
+        }
+      ],
+      "xuid": "2535771801919068",
+      "state": "Online"
+    },
+    {
+      "lastSeen": {
+        "titleId": "1653768775",
+        "deviceType": "WindowsOneCore",
+        "timestamp": "2018-05-30T20:38:04.3994143Z",
+        "titleName": "Cities: Skylines"
+      },
+      "xuid": "2508565379774180",
+      "state": "Offline"
+    }
+  ]

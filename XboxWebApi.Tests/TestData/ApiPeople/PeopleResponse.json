@@ -1,0 +1,37 @@
+{
+    "totalCount": 3,
+    "people": [
+      {
+        "isKnown": false,
+        "isFavorite": true,
+        "isFollowedByCaller": true,
+        "isUnfollowingFeed": false,
+        "xuid": "2580478784034343",
+        "isFollowingCaller": true,
+        "socialNetworks": [],
+        "addedDateTimeUtc": "2017-08-05T17:03:51.7279382Z"
+      },
+      {
+        "isKnown": false,
+        "isFavorite": true,
+        "isFollowedByCaller": true,
+        "isUnfollowingFeed": false,
+        "xuid": "2535771801919068",
+        "isFollowingCaller": true,
+        "socialNetworks": [],
+        "addedDateTimeUtc": "2017-07-22T12:55:43.7301922Z"
+      },
+      {
+        "isKnown": false,
+        "isFavorite": true,
+        "isFollowedByCaller": true,
+        "isUnfollowingFeed": false,
+        "xuid": "2508565379774180",
+        "isFollowingCaller": true,
+        "socialNetworks": [
+          "LegacyXboxLive"
+        ],
+        "addedDateTimeUtc": "2013-07-01T15:10:28.46Z"
+      }
+    ]
+  }

@@ -24,6 +24,12 @@
     <Folder Include="Authentication\" />
     <Folder Include="Authentication\Token\" />
     <Folder Include="Authentication\Model\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Api\" />
+    <Folder Include="Services\Model\" />
+    <Folder Include="Services\Model\People\" />
+    <Folder Include="Services\Model\Presence\" />
+    <Folder Include="Services\Model\Message\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />

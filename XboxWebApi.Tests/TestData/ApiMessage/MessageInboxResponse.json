@@ -1,0 +1,78 @@
+{
+    "results": [
+      {
+        "header": {
+          "id": "1191",
+          "isRead": true,
+          "senderXuid": 2508565379774180,
+          "sender": "Some Gamertag",
+          "sent": "2018-05-20T20:08:27Z",
+          "expiration": "2018-06-19T20:08:27Z",
+          "messageType": "User",
+          "hasText": true,
+          "hasPhoto": false,
+          "hasAudio": false,
+          "messageFolderType": "Inbox"
+        },
+        "messageSummary": "Hey, how are you?"
+      },
+      {
+        "header": {
+          "id": "1189",
+          "isRead": true,
+          "senderXuid": 0,
+          "sender": "Xbox Live",
+          "sent": "2018-05-08T01:07:35Z",
+          "expiration": "2018-06-07T01:07:35Z",
+          "messageType": "Service",
+          "hasText": true,
+          "hasPhoto": false,
+          "hasAudio": false,
+          "messageFolderType": "Inbox"
+        },
+        "messageSummary": "Please remember: Xb",
+        "actions": [
+          {
+            "id": 0,
+            "vuiGui": "Launch website",
+            "vuiAlm": null,
+            "vuiPron": null,
+            "vuiConf": null,
+            "launch": "https://xbox.com",
+            "launchType": "DeepLink"
+          }
+        ]
+      },
+      {
+        "header": {
+          "id": "1186",
+          "isRead": true,
+          "senderXuid": 0,
+          "sender": "Xbox Live",
+          "sent": "2018-04-25T02:13:50Z",
+          "expiration": "2018-05-25T02:13:50Z",
+          "messageType": "Service",
+          "hasText": true,
+          "hasPhoto": false,
+          "hasAudio": false,
+          "messageFolderType": "Inbox"
+        },
+        "messageSummary": "Thanks for parti...",
+        "actions": [
+          {
+            "id": 0,
+            "vuiGui": "Redeem code",
+            "vuiAlm": null,
+            "vuiPron": null,
+            "vuiConf": null,
+            "launch": "ABCDE-ABCDE-ABCDE-ABCDE-DCC9Z",
+            "launchType": "FiveByFive"
+          }
+        ]
+      }
+    ],
+    "pagingInfo": {
+      "continuationToken": null,
+      "totalItems": 3
+    }
+  }

@@ -1,0 +1,43 @@
+{
+    "conversation": {
+      "summary": {
+        "senderXuid": "2508565379774180",
+        "senderGamerTag": "Some Gamertag",
+        "lastUpdated": "2018-05-20T21:12:59Z",
+        "lastSent": "2018-05-20T21:12:59Z",
+        "messageCount": 2,
+        "unreadMessageCount": 0,
+        "lastMessage": null
+      },
+      "messages": [
+        {
+          "messageId": 1192,
+          "senderTitleId": 0,
+          "senderXuid": "2508565379774180",
+          "senderGamerTag": "Some Gamertag",
+          "sentTime": "2018-05-20T21:12:59Z",
+          "lastUpdateTime": "0001-01-01T00:00:00",
+          "messageType": "User",
+          "messageFolder": "SentItems",
+          "isRead": true,
+          "hasPhoto": false,
+          "hasAudio": false,
+          "messageText": "I am good, thx, how are you?"
+        },
+        {
+          "messageId": 1191,
+          "senderTitleId": 0,
+          "senderXuid": "2508565379774180",
+          "senderGamerTag": "Some Gamertag",
+          "sentTime": "2018-05-20T20:08:27Z",
+          "lastUpdateTime": "0001-01-01T00:00:00",
+          "messageType": "User",
+          "messageFolder": "Inbox",
+          "isRead": true,
+          "hasPhoto": false,
+          "hasAudio": false,
+          "messageText": "Hey, how are you?"
+        }
+      ]
+    }
+  }
