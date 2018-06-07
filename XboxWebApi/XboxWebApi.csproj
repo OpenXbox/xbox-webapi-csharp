@@ -19,10 +19,11 @@
     <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Extensions\" />
     <Folder Include="Authentication\" />
     <Folder Include="Authentication\Token\" />
     <Folder Include="Authentication\Model\" />
-    <Folder Include="Common\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
