@@ -29,6 +29,7 @@
     <Folder Include="Services\Model\" />
     <Folder Include="Services\Model\People\" />
     <Folder Include="Services\Model\Presence\" />
+    <Folder Include="Services\Model\Profile\" />
     <Folder Include="Services\Model\Message\" />
   </ItemGroup>
   <ItemGroup>

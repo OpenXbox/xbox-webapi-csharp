@@ -1,0 +1,35 @@
+{
+    "profileUsers": [
+      {
+        "id": "2580478784034343",
+        "hostId": "2580478784034343",
+        "settings": [
+          {
+            "id": "AppDisplayName",
+            "value": "Some Gamertag"
+          },
+          {
+            "id": "Gamerscore",
+            "value": "1337000"
+          },
+          {
+            "id": "Gamertag",
+            "value": "Some Gamertag"
+          },
+          {
+            "id": "PublicGamerpic",
+            "value": "http://images-eds.xboxlive.com/image?url=abcdef"
+          },
+          {
+            "id": "XboxOneRep",
+            "value": "Superstar"
+          },
+          {
+            "id": "RealName",
+            "value": "John Doe"
+          }
+        ],
+        "isSponsoredUser": false
+      }
+    ]
+  }
