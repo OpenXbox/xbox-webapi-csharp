@@ -23,7 +23,7 @@ namespace XboxWebApi.Services.Api
         {
             RestRequestEx request = new RestRequestEx("users/me/people", Method.GET);
             request.AddHeaders(Headers);
-            IRestResponse<PeopleResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<PeopleResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<PeopleResponse>(request);
             return response.Data;
         }
@@ -32,7 +32,7 @@ namespace XboxWebApi.Services.Api
         {
             RestRequestEx request = new RestRequestEx("users/me/summary", Method.GET);
             request.AddHeaders(Headers);
-            IRestResponse<PeopleSummaryResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<PeopleSummaryResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<PeopleSummaryResponse>(request);
             return response.Data;
         }
@@ -41,7 +41,7 @@ namespace XboxWebApi.Services.Api
         {
             RestRequestEx request = new RestRequestEx($"users/xuid({xuid})/summary", Method.GET);
             request.AddHeaders(Headers);
-            IRestResponse<PeopleSummaryResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<PeopleSummaryResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<PeopleSummaryResponse>(request);
             return response.Data;
         }
@@ -50,7 +50,7 @@ namespace XboxWebApi.Services.Api
         {
             RestRequestEx request = new RestRequestEx($"users/gt({gamertag})/summary", Method.GET);
             request.AddHeaders(Headers);
-            IRestResponse<PeopleSummaryResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<PeopleSummaryResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<PeopleSummaryResponse>(request);
             return response.Data;
         }
@@ -61,7 +61,7 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx("users/me/people/xuids", Method.POST);
             request.AddHeaders(Headers);
             request.AddJsonBody(body, JsonNamingStrategy.CamelCase);
-            IRestResponse<PeopleResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<PeopleResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<PeopleResponse>(request);
             return response.Data;
         }

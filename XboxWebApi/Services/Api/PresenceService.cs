@@ -25,7 +25,7 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx("users/me", Method.GET);
             request.AddHeaders(Headers);
             request.AddQueryParameters(query.GetQuery());
-            IRestResponse<PresenceResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<PresenceResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<PresenceResponse>(request);
             return response.Data;
         }
@@ -36,7 +36,7 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx($"users/xuid({xuid})", Method.GET);
             request.AddHeaders(Headers);
             request.AddQueryParameters(query.GetQuery());
-            IRestResponse<PresenceResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<PresenceResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<PresenceResponse>(request);
             return response.Data;
         }
@@ -49,7 +49,7 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx("users/batch", Method.POST);
             request.AddHeaders(Headers);
             request.AddJsonBody(body, JsonNamingStrategy.CamelCase);
-            IRestResponse<PresenceBatchResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<PresenceBatchResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<PresenceBatchResponse>(request);
             return response.Data;
         }

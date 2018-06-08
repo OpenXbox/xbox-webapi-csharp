@@ -27,7 +27,7 @@ namespace XboxWebApi.Services.Api
                 $"users/xuid({Config.XboxUserId})/inbox", Method.GET);
             request.AddHeaders(Headers);
             request.AddQueryParameters(query.GetQuery());
-            IRestResponse<MessageInboxResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<MessageInboxResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<MessageInboxResponse>(request);
             return response.Data;
         }
@@ -37,7 +37,7 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx(
                 $"users/xuid({Config.XboxUserId})/inbox/{messageId}", Method.GET);
             request.AddHeaders(Headers);
-            IRestResponse<MessageResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<MessageResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<MessageResponse>(request);
             return response.Data;
         }
@@ -50,7 +50,7 @@ namespace XboxWebApi.Services.Api
                 $"users/xuid({Config.XboxUserId})/inbox/conversations", Method.GET);
             request.AddHeaders(Headers);
             request.AddQueryParameters(query.GetQuery());
-            IRestResponse<ConversationsResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<ConversationsResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<ConversationsResponse>(request);
             return response.Data;
         }
@@ -60,7 +60,7 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx(
                 $"users/xuid({Config.XboxUserId})/inbox/conversations/xuid({xuid})", Method.GET);
             request.AddHeaders(Headers);
-            IRestResponse<ConversationResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<ConversationResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<ConversationResponse>(request);
             return response.Data;
         }
@@ -70,7 +70,7 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx(
                 $"users/xuid({Config.XboxUserId})/inbox/{messageId}", Method.DELETE);
             request.AddHeaders(Headers);
-            IRestResponse response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute(request);
         }
 
@@ -80,7 +80,7 @@ namespace XboxWebApi.Services.Api
                 $"users/xuid({Config.XboxUserId})/outbox", Method.POST);
             request.AddHeaders(Headers);
             request.AddJsonBody(postData, JsonNamingStrategy.CamelCase);
-            IRestResponse response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute(request);
         }
 

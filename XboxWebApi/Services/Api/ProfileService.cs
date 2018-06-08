@@ -32,7 +32,7 @@ namespace XboxWebApi.Services.Api
             ProfilesRequest body = new ProfilesRequest(xuids, profileSettings);
             request.AddHeaders(Headers);
             request.AddJsonBody(body, JsonNamingStrategy.CamelCase);
-            IRestResponse<ProfileResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<ProfileResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<ProfileResponse>(request);
             return response.Data;
         }
@@ -49,7 +49,7 @@ namespace XboxWebApi.Services.Api
             ProfileRequestQuery query = new ProfileRequestQuery(profileSettings);
             request.AddHeaders(Headers);
             request.AddQueryParameters(query.GetQuery());
-            IRestResponse<ProfileResponse> response = Client(JsonNamingStrategy.CamelCase)
+            IRestResponse<ProfileResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
                 .Execute<ProfileResponse>(request);
             return response.Data;
         }

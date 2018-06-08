@@ -17,16 +17,11 @@ namespace XboxWebApi.Services
             BaseUrl = baseUrl;
         }
 
-        public RestClientEx Client(JsonNamingStrategy namingStrategy)
+        public RestClientEx ClientFactory(JsonNamingStrategy namingStrategy = JsonNamingStrategy.Default)
         {
             RestClientEx client = new RestClientEx(BaseUrl, namingStrategy);
             client.AddDefaultHeader("Authorization", $"XBL3.0 x={Config.Userhash};{Config.xToken.Jwt}");
             return client;
-        }
-
-        public RestClientEx Client()
-        {
-            return Client(JsonNamingStrategy.Default);
         }
     }
 }
