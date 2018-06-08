@@ -113,12 +113,13 @@ namespace XboxWebApi.Common
             });
         }
 
-        public static NewtonsoftJsonSerializer Default
-        {
-            get
-            {
-                return NewtonsoftJsonSerializer.Create(JsonNamingStrategy.Default);
-            }
-        }
+        public static NewtonsoftJsonSerializer Default =>
+                NewtonsoftJsonSerializer.Create(JsonNamingStrategy.Default);
+
+        public static NewtonsoftJsonSerializer CamelCase =>
+                NewtonsoftJsonSerializer.Create(JsonNamingStrategy.CamelCase);
+
+        public static NewtonsoftJsonSerializer SnakeCase =>
+                NewtonsoftJsonSerializer.Create(JsonNamingStrategy.SnakeCase);
     }
 }
