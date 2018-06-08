@@ -74,8 +74,7 @@ if (!xtoken.Valid)
     return;
 }
 
-XblConfiguration xblConfig = new XblConfiguration(xtoken.UserInformation,
-    xtoken, XblLanguage.United_States);
+XblConfiguration xblConfig = new XblConfiguration(xtoken, XblLanguage.United_States);
 
 PresenceService presenceService = new PresenceService(xblConfig);
 PeopleService peopleService = new PeopleService(xblConfig);

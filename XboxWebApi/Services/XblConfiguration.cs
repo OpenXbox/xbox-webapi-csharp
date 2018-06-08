@@ -8,17 +8,16 @@ namespace XboxWebApi.Services
 {
     public class XblConfiguration
     {
-        public XboxUserInformation UserInfo { get; internal set; }
         public XToken xToken { get; internal set; }
         public XblLocale Locale { get; internal set; }
 
+        public XboxUserInformation UserInfo => xToken.UserInformation;
         public ulong XboxUserId => UserInfo.XboxUserId;
         public string Userhash => UserInfo.Userhash;
         public bool TokenValid => xToken.Valid;
 
-        public XblConfiguration(XboxUserInformation userInfo, XToken xtoken, XblLocale locale)
+        public XblConfiguration(XToken xtoken, XblLocale locale)
         {
-            UserInfo = userInfo;
             xToken = xtoken;
             Locale = locale;
         }
