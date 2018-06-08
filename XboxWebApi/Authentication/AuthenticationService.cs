@@ -25,6 +25,12 @@ namespace XboxWebApi.Authentication
 			RefreshToken = refreshToken;
 		}
 
+		public static RestClientEx ClientFactory(string baseUrl,
+			JsonNamingStrategy naming = JsonNamingStrategy.Default)
+		{
+			return new RestClientEx(baseUrl, naming);
+		}
+
 		public bool Authenticate()
 		{
 			WindowsLiveResponse windowsLiveTokens = RefreshLiveToken(RefreshToken);
@@ -39,7 +45,7 @@ namespace XboxWebApi.Authentication
 		public static WindowsLiveResponse RefreshLiveToken(
 			RefreshToken refreshToken)
 		{
-			RestClientEx client = new RestClientEx("https://login.live.com",
+			RestClientEx client = ClientFactory("https://login.live.com",
 				JsonNamingStrategy.SnakeCase);
 			RestRequestEx request = new RestRequestEx("oauth20_token.srf", Method.GET);
 			NameValueCollection nv = new Model.WindowsLiveRefreshQuery(refreshToken).GetQuery();
@@ -50,7 +56,7 @@ namespace XboxWebApi.Authentication
 
 		public static UserToken AuthenticateXASU(AccessToken accessToken)
 		{
-			RestClientEx client = new RestClientEx("https://user.auth.xboxlive.com");
+			RestClientEx client = ClientFactory("https://user.auth.xboxlive.com");
 			RestRequestEx request = new RestRequestEx("user/authenticate", Method.POST);
 			request.AddHeader("x-xbl-contract-version", "1");
 			request.AddJsonBody(new XASURequest(accessToken));
@@ -60,7 +66,7 @@ namespace XboxWebApi.Authentication
 
 		public static DeviceToken AuthenticateXASD(AccessToken accessToken)
 		{
-			RestClientEx client = new RestClientEx("https://device.auth.xboxlive.com");
+			RestClientEx client = ClientFactory("https://device.auth.xboxlive.com");
 			RestRequestEx request = new RestRequestEx("device/authenticate", Method.POST);
             request.AddHeader("x-xbl-contract-version", "1");
             request.AddJsonBody(new XASDRequest(accessToken));
@@ -71,7 +77,7 @@ namespace XboxWebApi.Authentication
 		public static TitleToken AuthenticateXAST(AccessToken accessToken,
 		                                          DeviceToken deviceToken)
 		{
-			RestClientEx client = new RestClientEx("https://title.auth.xboxlive.com");
+			RestClientEx client = ClientFactory("https://title.auth.xboxlive.com");
             RestRequestEx request = new RestRequestEx("title/authenticate", Method.POST);
             request.AddHeader("x-xbl-contract-version", "1");
 			request.AddJsonBody(new XASTRequest(accessToken, deviceToken));
@@ -83,7 +89,7 @@ namespace XboxWebApi.Authentication
 		                                      DeviceToken deviceToken=null,
 		                                      TitleToken titleToken=null)
 		{
-			RestClientEx client = new RestClientEx("https://xsts.auth.xboxlive.com");
+			RestClientEx client = ClientFactory("https://xsts.auth.xboxlive.com");
 			RestRequestEx request = new RestRequestEx("xsts/authorize", Method.POST);
             request.AddHeader("x-xbl-contract-version", "1");
 			request.AddJsonBody(new XSTSRequest(userToken,
@@ -95,7 +101,7 @@ namespace XboxWebApi.Authentication
         
 		public static string GetWindowsLiveAuthenticationUrl()
 		{
-			RestClientEx client = new RestClientEx("https://login.live.com");
+			RestClientEx client = ClientFactory("https://login.live.com");
 			RestRequestEx request = new RestRequestEx("oauth20_authorize.srf", Method.GET);
 			NameValueCollection nv = new Model.WindowsLiveAuthenticationQuery().GetQuery();
 			request.AddQueryParameters(nv);
