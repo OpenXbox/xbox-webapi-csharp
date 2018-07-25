@@ -2,7 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/8nhploewqrf5atdl/branch/master?svg=true)](https://ci.appveyor.com/project/tuxuser/xbox-webapi-csharp/branch/master)
 [![NuGet](https://img.shields.io/nuget/v/OpenXbox.XboxWebApi.svg)](https://www.nuget.org/packages/OpenXbox.XboxWebApi)
-[![Discord](https://img.shields.io/badge/discord-OpenXbox-blue.svg)](https://discord.gg/uzbC73m)
+[![Discord](https://img.shields.io/badge/discord-OpenXbox-blue.svg)](https://discord.gg/E8kkJhQ)
 
 C# Xbox WebAPI, includes support for authentication with Windows Live / Xbox Live.
 
