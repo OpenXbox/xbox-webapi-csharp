@@ -4,4 +4,7 @@ using System.Collections.Generic;
 
 namespace XboxWebApi.Services.Model.X360Marketplace
 {
+    public class CatalogItemResponse
+    {
+    }
 }
