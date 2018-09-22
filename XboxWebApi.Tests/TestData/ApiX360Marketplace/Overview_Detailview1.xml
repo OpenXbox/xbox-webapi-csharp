@@ -1,0 +1,37 @@
+<feed xmlns:live="http://www.live.com/marketplace" xmlns="http://www.w3.org/2005/Atom">
+  <live:totalItems>754</live:totalItems>
+  <live:numItems>3</live:numItems>
+  <title>FindGames Results</title>
+  <updated>2018-03-13T17:00:43.64Z</updated>
+  <entry live:itemNum="1" live:detailView="1">
+    <id>urn:uuid:66ACD000-77FE-1000-9115-D802584109B7</id>
+    <updated>2018-03-13T17:00:43.64Z</updated>
+    <title>0 day Attack on Earth</title>
+    <content type="text">game content</content>
+    <live:media>
+      <live:mediaType>23</live:mediaType>
+      <live:gameTitleMediaId>urn:uuid:66ACD000-77FE-1000-9115-D802584109B7</live:gameTitleMediaId>
+    </live:media>
+  </entry>
+  <entry live:itemNum="2" live:detailView="1">
+    <id>urn:uuid:66ACD000-77FE-1000-9115-D802584109A8</id>
+    <updated>2014-08-07T22:44:54.08Z</updated>
+    <title>0D Beat Drop</title>
+    <content type="text">game content</content>
+    <live:media>
+      <live:mediaType>23</live:mediaType>
+      <live:gameTitleMediaId>urn:uuid:66ACD000-77FE-1000-9115-D802584109A8</live:gameTitleMediaId>
+    </live:media>
+  </entry>
+  <entry live:itemNum="3" live:detailView="1">
+    <id>urn:uuid:66ACD000-77FE-1000-9115-D802584112AF</id>
+    <updated>2014-03-17T18:37:35.987Z</updated>
+    <title>10 Frame Bowling</title>
+    <content type="text">game content</content>
+    <live:media>
+      <live:mediaType>23</live:mediaType>
+      <live:gameTitleMediaId>urn:uuid:66ACD000-77FE-1000-9115-D802584112AF</live:gameTitleMediaId>
+    </live:media>
+  </entry>
+</feed>
+

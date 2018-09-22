@@ -1,0 +1,24 @@
+{
+    "dateOfBirth": "1980-03-23T00:00:00",
+    "email": "my@email.com",
+    "firstName": "Firstname",
+    "gamerTag": "Some Gamertag",
+    "homeAddressInfo": {
+      "street1": "Streetname 12",
+      "street2": null,
+      "city": "Cityname",
+      "state": null,
+      "postalCode": "51223",
+      "country": "DE"
+    },
+    "isAdult": true,
+    "lastName": "Lastname",
+    "locale": "de-DE",
+    "msftOptin": false,
+    "ownerPuid": 1048393450222222,
+    "partnerOptin": false,
+    "puid": 1048393450222222,
+    "touAcceptanceDate": "1753-01-01T00:00:00",
+    "xuid": 25302345914121232,
+    "gamerTagChangeReason": null
+  }

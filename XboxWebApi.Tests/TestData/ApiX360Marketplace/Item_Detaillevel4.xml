@@ -1,0 +1,76 @@
+<a:feed xmlns:a="http://www.w3.org/2005/Atom" xmlns="http://marketplace.xboxlive.com/resource/product/v1">
+  <a:author>
+    <a:name>Xbox LIVE</a:name>
+  </a:author>
+  <a:id>http://marketplace.xboxlive.com/resource/product/v1</a:id>
+  <a:title>Query Result</a:title>
+  <a:updated>2018-06-18 00:05:49Z</a:updated>
+  <totalItems>1</totalItems>
+  <numItems>1</numItems>
+  <locale>en-US</locale>
+  <a:entry xmlns="http://marketplace.xboxlive.com/resource/product/v1" xmlns:a="http://www.w3.org/2005/Atom" itemNum="1">
+    <a:title>Rockstar Table Tennis</a:title>
+    <a:id>urn:uuid:66acd000-77fe-1000-9115-d802545407df</a:id>
+    <a:updated>2018-06-12T17:01:39.260Z</a:updated>
+    <productType>1</productType>
+    <reducedTitle>Rockstar Table Tennis</reducedTitle>
+    <voiceDisplayTitle>Table Tennis</voiceDisplayTitle>
+    <globalOriginalReleaseDate>2010-07-13T00:00:00</globalOriginalReleaseDate>
+    <countryReleaseDate>2010-07-13T00:00:00</countryReleaseDate>
+    <ratingId>10</ratingId>
+    <titleId>1414793183</titleId>
+    <userRating>3.25</userRating>
+    <numberOfRatings>7893</numberOfRatings>
+    <offerTargetTypes>
+      <offerTargetType>1</offerTargetType>
+      <offerTargetType>20</offerTargetType>
+    </offerTargetTypes>
+    <offerInstances>
+      <offerInstance>
+        <startDate>2010-05-03T09:00:00Z</startDate>
+      </offerInstance>
+      <offerInstance>
+        <startDate>2010-05-03T09:00:00Z</startDate>
+      </offerInstance>
+    </offerInstances>
+    <images>
+      <image>
+        <relationshipType>33</relationshipType>
+        <size>23</size>
+        <fileUrl>http://download.xbox.com/content/images/66acd000-77fe-1000-9115-d802545407df/1033/boxartlg.jpg</fileUrl>
+      </image>
+    </images>
+    <categories>
+      <category>
+        <categoryId>3000</categoryId>
+        <categoryName>Game Genres</categoryName>
+        <categorySystemId>3000</categorySystemId>
+      </category>
+      <category>
+        <categoryId>3005</categoryId>
+        <categoryName>Family</categoryName>
+        <categorySystemId>3000</categorySystemId>
+        <parentCategoryId>3027</parentCategoryId>
+      </category>
+      <category>
+        <categoryId>3013</categoryId>
+        <categoryName>Sports &amp; Recreation</categoryName>
+        <categorySystemId>3000</categorySystemId>
+        <parentCategoryId>3027</parentCategoryId>
+      </category>
+      <category>
+        <categoryId>3027</categoryId>
+        <categoryName>Xbox LIVE Games</categoryName>
+        <categorySystemId>3000</categorySystemId>
+        <parentCategoryId>3000</parentCategoryId>
+      </category>
+    </categories>
+    <parentProducts>
+      <parentProduct>
+        <parentProductId>66acd000-77fe-1000-9115-d802545407df</parentProductId>
+        <parentSortOrder>0</parentSortOrder>
+      </parentProduct>
+    </parentProducts>
+  </a:entry>
+</a:feed>
+

@@ -1,0 +1,137 @@
+<feed xmlns:live="http://www.live.com/marketplace" xmlns="http://www.w3.org/2005/Atom">
+  <live:totalItems>754</live:totalItems>
+  <live:numItems>3</live:numItems>
+  <title>FindGames Results</title>
+  <updated>2018-03-13T17:00:43.64Z</updated>
+  <entry live:itemNum="1" live:detailView="2">
+    <id>urn:uuid:66ACD000-77FE-1000-9115-D802584109B7</id>
+    <updated>2018-03-13T17:00:43.64Z</updated>
+    <title>0 day Attack on Earth</title>
+    <content type="text">game content</content>
+    <live:media>
+      <live:mediaType>23</live:mediaType>
+      <live:gameTitleMediaId>urn:uuid:66ACD000-77FE-1000-9115-D802584109B7</live:gameTitleMediaId>
+      <live:reducedTitle>0 day Attack on Earth</live:reducedTitle>
+      <live:reducedDescription>Seven days that will determine the fate of humanity now begin&#8230;
+High-tech Tokyo is in rubble. The once vibrant New York ground to a halt. And the city of lights, Paris, enveloped by darkness and despair. 
+Join mankind&#8217;s struggle against massive invaders as they converge on the world&#8217;s major cities.  In battles set over actual areas in modern metropolitan cities, take flight in one of 8 futuristic aircraft as you help repel these humongous enemies. With more than 20 stages covering 3 cities, th&#8230;</live:reducedDescription>
+      <live:availabilityDate>2010-01-25T23:48:00</live:availabilityDate>
+      <live:releaseDate>2010-01-25T23:48:00</live:releaseDate>
+      <live:ratingId>20</live:ratingId>
+      <live:customGenre>Xbox LIVE &#12450;&#12540;&#12465;&#12540;&#12489;</live:customGenre>
+      <live:developer>GULTI CO.,LTD.</live:developer>
+      <live:publisher>SQUARE ENIX CO.,LTD</live:publisher>
+      <live:titleId>1480657335</live:titleId>
+      <live:effectiveTitleId>1480657335</live:effectiveTitleId>
+      <live:gameReducedTitle>0 day Attack on Earth</live:gameReducedTitle>
+      <live:ratingAggregate>2.75</live:ratingAggregate>
+      <live:numberOfRatings>7904</live:numberOfRatings>
+    </live:media>
+    <live:categories>
+      <live:category>
+        <live:categoryId>3000</live:categoryId>
+        <live:system>3000</live:system>
+        <live:name>Game Genres</live:name>
+      </live:category>
+      <live:category>
+        <live:categoryId>3011</live:categoryId>
+        <live:system>3000</live:system>
+        <live:name>Shooter</live:name>
+      </live:category>
+      <live:category>
+        <live:categoryId>3027</live:categoryId>
+        <live:system>3000</live:system>
+        <live:name>Xbox LIVE Games</live:name>
+      </live:category>
+    </live:categories>
+  </entry>
+  <entry live:itemNum="2" live:detailView="2">
+    <id>urn:uuid:66ACD000-77FE-1000-9115-D802584109A8</id>
+    <updated>2014-08-07T22:44:54.08Z</updated>
+    <title>0D Beat Drop</title>
+    <content type="text">game content</content>
+    <live:media>
+      <live:mediaType>23</live:mediaType>
+      <live:gameTitleMediaId>urn:uuid:66ACD000-77FE-1000-9115-D802584109A8</live:gameTitleMediaId>
+      <live:reducedTitle>0D Beat Drop</live:reducedTitle>
+      <live:reducedDescription>(Online Interactions Not Rated by the ESRB) Are you ready to Beat Drop? The fusion of "rhythm" and "puzzle" has created a completely new  kind of game! Drop Pieces along with the beat, and go for the win with our explosive chains! In addition to the single player mode, which has over 100 stages, online play has various options such as playing against a single player, playing with 4 players total, or having a team battle!</live:reducedDescription>
+      <live:availabilityDate>2010-01-18T00:00:00</live:availabilityDate>
+      <live:releaseDate>2010-01-18T00:00:00</live:releaseDate>
+      <live:ratingId>10</live:ratingId>
+      <live:developer>Cyclone Zero.,Ltd.</live:developer>
+      <live:publisher>ARC SYSTEM WORKS Co.,Ltd</live:publisher>
+      <live:titleId>1480657320</live:titleId>
+      <live:effectiveTitleId>1480657320</live:effectiveTitleId>
+      <live:gameReducedTitle>0D Beat Drop</live:gameReducedTitle>
+      <live:ratingAggregate>2.50</live:ratingAggregate>
+      <live:numberOfRatings>3172</live:numberOfRatings>
+    </live:media>
+    <live:categories>
+      <live:category>
+        <live:categoryId>3000</live:categoryId>
+        <live:system>3000</live:system>
+        <live:name>Game Genres</live:name>
+      </live:category>
+      <live:category>
+        <live:categoryId>3022</live:categoryId>
+        <live:system>3000</live:system>
+        <live:name>Puzzle &amp; Trivia</live:name>
+      </live:category>
+      <live:category>
+        <live:categoryId>3027</live:categoryId>
+        <live:system>3000</live:system>
+        <live:name>Xbox LIVE Games</live:name>
+      </live:category>
+    </live:categories>
+  </entry>
+  <entry live:itemNum="3" live:detailView="2">
+    <id>urn:uuid:66ACD000-77FE-1000-9115-D802584112AF</id>
+    <updated>2014-03-17T18:37:35.987Z</updated>
+    <title>10 Frame Bowling</title>
+    <content type="text">game content</content>
+    <live:media>
+      <live:mediaType>23</live:mediaType>
+      <live:gameTitleMediaId>urn:uuid:66ACD000-77FE-1000-9115-D802584112AF</live:gameTitleMediaId>
+      <live:reducedTitle>10 Frame Bowling</live:reducedTitle>
+      <live:reducedDescription>A new way to enjoy your favourite sports! Fast-tracked fun in solo or multiplayer, micro goals and badges to win. </live:reducedDescription>
+      <live:availabilityDate>2013-03-05T00:00:00</live:availabilityDate>
+      <live:releaseDate>2013-03-12T00:00:00</live:releaseDate>
+      <live:ratingId>10</live:ratingId>
+      <live:developer>Rare</live:developer>
+      <live:publisher>Microsoft Studios</live:publisher>
+      <live:titleId>1480659631</live:titleId>
+      <live:effectiveTitleId>1480659631</live:effectiveTitleId>
+      <live:gameReducedTitle>10 Frame Bowling</live:gameReducedTitle>
+      <live:ratingAggregate>3.25</live:ratingAggregate>
+      <live:numberOfRatings>3271</live:numberOfRatings>
+    </live:media>
+    <live:categories>
+      <live:category>
+        <live:categoryId>3000</live:categoryId>
+        <live:system>3000</live:system>
+        <live:name>Game Genres</live:name>
+      </live:category>
+      <live:category>
+        <live:categoryId>3005</live:categoryId>
+        <live:system>3000</live:system>
+        <live:name>Family</live:name>
+      </live:category>
+      <live:category>
+        <live:categoryId>3027</live:categoryId>
+        <live:system>3000</live:system>
+        <live:name>Xbox LIVE Games</live:name>
+      </live:category>
+      <live:category>
+        <live:categoryId>3028</live:categoryId>
+        <live:system>3000</live:system>
+        <live:name>Kinect</live:name>
+      </live:category>
+      <live:category>
+        <live:categoryId>12001</live:categoryId>
+        <live:system>12000</live:system>
+        <live:name>Game Publisher Bit 1</live:name>
+      </live:category>
+    </live:categories>
+  </entry>
+</feed>
+

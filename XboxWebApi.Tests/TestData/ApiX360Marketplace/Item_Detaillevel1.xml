@@ -1,0 +1,100 @@
+<a:feed xmlns:a="http://www.w3.org/2005/Atom" xmlns="http://marketplace.xboxlive.com/resource/product/v1">
+  <a:author>
+    <a:name>Xbox LIVE</a:name>
+  </a:author>
+  <a:id>http://marketplace.xboxlive.com/resource/product/v1</a:id>
+  <a:title>Query Result</a:title>
+  <a:updated>2018-06-18 00:05:17Z</a:updated>
+  <totalItems>1</totalItems>
+  <numItems>1</numItems>
+  <locale>en-US</locale>
+  <a:entry xmlns="http://marketplace.xboxlive.com/resource/product/v1" xmlns:a="http://www.w3.org/2005/Atom" itemNum="1">
+    <a:title>Rockstar Table Tennis</a:title>
+    <a:id>urn:uuid:66acd000-77fe-1000-9115-d802545407df</a:id>
+    <productType>1</productType>
+    <reducedDescription>Rockstar Games presents Table Tennis is the debut next-generation title from the creators of the Grand Theft Auto and Midnight Club franchises. Developed by Rockstar San Diego, Table Tennis harnesses the incredible power of Xbox 360&#8482; through an advanced game engine designed specifically for next-gen console technology. Utilizing the full capabilities of the hardware, Table Tennis is visually stunning, the physics are fluid and natural, and, when coupled with the intuitive gameplay, the competit&#8230;</reducedDescription>
+    <fullTitle>Rockstar Table Tennis</fullTitle>
+    <fullDescription>(Online Interactions Not Rated by the ESRB) The Games on Demand version supports English, French, Italian, German, and Spanish. Download the manual for this game by locating the game on http://marketplace.xbox.com and selecting &#8220;See Game Manual". Rockstar Games presents Table Tennis is the debut next-generation title from the creators of the Grand Theft Auto and Midnight Club franchises. Developed by Rockstar San Diego, Table Tennis harnesses the incredible power of Xbox 360&#8482; through an advanced game engine designed specifically for next-gen console technology. Utilizing the full capabilities of the hardware, Table Tennis is visually stunning, the physics are fluid and natural, and, when coupled with the intuitive gameplay, the competition and ferocity found in a live table tennis match are authentically recreated. There are no refunds for this item. For more information, see www.xbox.com/live/accounts.</fullDescription>
+    <ratingId>10</ratingId>
+    <titleId>1414793183</titleId>
+    <effectiveTitleId>1414793183</effectiveTitleId>
+    <userRating>3.25</userRating>
+    <numberOfRatings>7893</numberOfRatings>
+    <gameReducedTitle>Rockstar Table Tennis</gameReducedTitle>
+    <offerInstances>
+      <offerInstance>
+        <offerId>urn:uuid:f0000001-0000-4000-8000-0000545407df</offerId>
+        <hexOfferId>0x545407dff0000001</hexOfferId>
+        <paymentType>1</paymentType>
+        <price>99999</price>
+        <pricetext>99,999&#164;</pricetext>
+        <taxType>0</taxType>
+        <tiers>
+          <tier>3</tier>
+        </tiers>
+        <productInstance>
+          <offerLicenseTypeId>14</offerLicenseTypeId>
+          <productInstanceId>0a0f1bcd-b316-40ca-80fe-98eb1f2d0654</productInstanceId>
+          <installSize>215015</installSize>
+          <gameRegion>16711935</gameRegion>
+          <contentId>Cg8bzbMWyv6Y6x8tBlT5FeWGiMA=</contentId>
+        </productInstance>
+      </offerInstance>
+      <offerInstance>
+        <offerId>urn:uuid:f0000001-0000-4000-8000-0000545407df</offerId>
+        <hexOfferId>0x545407dff0000001</hexOfferId>
+        <paymentType>3</paymentType>
+        <price>14.99</price>
+        <pricetext>$14.99</pricetext>
+        <taxType>0</taxType>
+        <tiers>
+          <tier>3</tier>
+        </tiers>
+        <productInstance>
+          <offerLicenseTypeId>14</offerLicenseTypeId>
+          <productInstanceId>0a0f1bcd-b316-40ca-80fe-98eb1f2d0654</productInstanceId>
+          <installSize>215015</installSize>
+          <gameRegion>16711935</gameRegion>
+          <contentId>Cg8bzbMWyv6Y6x8tBlT5FeWGiMA=</contentId>
+        </productInstance>
+      </offerInstance>
+    </offerInstances>
+    <images>
+      <image>
+        <imageMediaInstanceId>409FA981-7C33-456D-9327-44D588B093B3</imageMediaInstanceId>
+        <relationshipType>33</relationshipType>
+        <format>4</format>
+        <size>23</size>
+        <fileUrl>http://download.xbox.com/content/images/66acd000-77fe-1000-9115-d802545407df/1033/boxartlg.jpg</fileUrl>
+      </image>
+      <image>
+        <imageMediaInstanceId>4BC2EA1C-1DA2-41EE-816D-A35020F148F9</imageMediaInstanceId>
+        <relationshipType>27</relationshipType>
+        <format>5</format>
+        <size>15</size>
+        <fileUrl>http://download.xbox.com/content/images/66acd000-77fe-1000-9115-d802545407df/1033/banner.png</fileUrl>
+      </image>
+      <image>
+        <imageMediaInstanceId>220A138B-15C2-4727-9DF9-D577E30DC2A9</imageMediaInstanceId>
+        <relationshipType>23</relationshipType>
+        <format>5</format>
+        <size>14</size>
+        <fileUrl>http://download.xbox.com/content/images/66acd000-77fe-1000-9115-d802545407df/1033/tile.png</fileUrl>
+      </image>
+      <image>
+        <imageMediaInstanceId>FE2E69F8-58CA-4DCC-A31A-F18D8613836C</imageMediaInstanceId>
+        <relationshipType>25</relationshipType>
+        <format>4</format>
+        <size>22</size>
+        <fileUrl>http://download.xbox.com/content/images/66acd000-77fe-1000-9115-d802545407df/1033/background.jpg</fileUrl>
+      </image>
+    </images>
+    <parentProducts>
+      <parentProduct>
+        <parentProductId>66acd000-77fe-1000-9115-d802545407df</parentProductId>
+        <parentSortOrder>0</parentSortOrder>
+      </parentProduct>
+    </parentProducts>
+  </a:entry>
+</a:feed>
+

@@ -1,0 +1,63 @@
+<a:feed xmlns:a="http://www.w3.org/2005/Atom" xmlns="http://marketplace.xboxlive.com/resource/product/v1">
+  <a:author>
+    <a:name>Xbox LIVE</a:name>
+  </a:author>
+  <a:id>http://marketplace.xboxlive.com/resource/product/v1</a:id>
+  <a:title>Query Result</a:title>
+  <a:updated>2018-06-18 00:05:39Z</a:updated>
+  <totalItems>1</totalItems>
+  <numItems>1</numItems>
+  <locale>en-US</locale>
+  <a:entry xmlns="http://marketplace.xboxlive.com/resource/product/v1" xmlns:a="http://www.w3.org/2005/Atom" itemNum="1">
+    <a:title>Rockstar Table Tennis</a:title>
+    <a:id>urn:uuid:66acd000-77fe-1000-9115-d802545407df</a:id>
+    <a:updated>2018-06-12T17:01:39.260Z</a:updated>
+    <a:content>game content</a:content>
+    <offerInstances>
+      <offerInstance>
+        <offerInstanceId>urn:uuid:f0000001-3067-4001-8000-0000545407df</offerInstanceId>
+        <offerId>urn:uuid:f0000001-0000-4000-8000-0000545407df</offerId>
+        <paymentType>1</paymentType>
+        <price>99999</price>
+        <pricetext>99,999&#164;</pricetext>
+      </offerInstance>
+      <offerInstance>
+        <offerInstanceId>urn:uuid:f0000001-3067-4003-8000-0000545407df</offerInstanceId>
+        <offerId>urn:uuid:f0000001-0000-4000-8000-0000545407df</offerId>
+        <paymentType>3</paymentType>
+        <price>14.99</price>
+        <pricetext>$14.99</pricetext>
+      </offerInstance>
+    </offerInstances>
+    <reducedDescription>Rockstar Games presents Table Tennis is the debut next-generation title from the creators of the Grand Theft Auto and Midnight Club franchises. Developed by Rockstar San Diego, Table Tennis harnesses the incredible power of Xbox 360&#8482; through an advanced game engine designed specifically for next-gen console technology. Utilizing the full capabilities of the hardware, Table Tennis is visually stunning, the physics are fluid and natural, and, when coupled with the intuitive gameplay, the competit&#8230;</reducedDescription>
+    <visibilityDate>2010-07-13T00:00:00</visibilityDate>
+    <titleId>1414793183</titleId>
+    <gameReducedTitle>Rockstar Table Tennis</gameReducedTitle>
+    <categories>
+      <category>
+        <categoryId>3000</categoryId>
+        <categoryName>Game Genres</categoryName>
+        <categorySystemId>3000</categorySystemId>
+      </category>
+      <category>
+        <categoryId>3005</categoryId>
+        <categoryName>Family</categoryName>
+        <categorySystemId>3000</categorySystemId>
+        <parentCategoryId>3027</parentCategoryId>
+      </category>
+      <category>
+        <categoryId>3013</categoryId>
+        <categoryName>Sports &amp; Recreation</categoryName>
+        <categorySystemId>3000</categorySystemId>
+        <parentCategoryId>3027</parentCategoryId>
+      </category>
+      <category>
+        <categoryId>3027</categoryId>
+        <categoryName>Xbox LIVE Games</categoryName>
+        <categorySystemId>3000</categorySystemId>
+        <parentCategoryId>3000</parentCategoryId>
+      </category>
+    </categories>
+  </a:entry>
+</a:feed>
+

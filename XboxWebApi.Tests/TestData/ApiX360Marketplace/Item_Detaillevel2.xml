@@ -1,0 +1,52 @@
+<a:feed xmlns:a="http://www.w3.org/2005/Atom" xmlns="http://marketplace.xboxlive.com/resource/product/v1">
+  <a:author>
+    <a:name>Xbox LIVE</a:name>
+  </a:author>
+  <a:id>http://marketplace.xboxlive.com/resource/product/v1</a:id>
+  <a:title>Query Result</a:title>
+  <a:updated>2018-06-18 00:05:30Z</a:updated>
+  <totalItems>1</totalItems>
+  <numItems>1</numItems>
+  <locale>en-US</locale>
+  <a:entry xmlns="http://marketplace.xboxlive.com/resource/product/v1" xmlns:a="http://www.w3.org/2005/Atom" itemNum="1">
+    <a:title>Rockstar Table Tennis</a:title>
+    <a:id>urn:uuid:66acd000-77fe-1000-9115-d802545407df</a:id>
+    <productType>1</productType>
+    <reducedDescription>Rockstar Games presents Table Tennis is the debut next-generation title from the creators of the Grand Theft Auto and Midnight Club franchises. Developed by Rockstar San Diego, Table Tennis harnesses the incredible power of Xbox 360&#8482; through an advanced game engine designed specifically for next-gen console technology. Utilizing the full capabilities of the hardware, Table Tennis is visually stunning, the physics are fluid and natural, and, when coupled with the intuitive gameplay, the competit&#8230;</reducedDescription>
+    <ratingId>10</ratingId>
+    <titleId>1414793183</titleId>
+    <userRating>3.25</userRating>
+    <numberOfRatings>7893</numberOfRatings>
+    <parentProducts>
+      <parentProduct>
+        <parentProductId>66acd000-77fe-1000-9115-d802545407df</parentProductId>
+        <parentReducedTitle>Rockstar Table Tennis</parentReducedTitle>
+        <parentSortOrder>0</parentSortOrder>
+      </parentProduct>
+    </parentProducts>
+    <images>
+      <image>
+        <imageMediaInstanceId>409FA981-7C33-456D-9327-44D588B093B3</imageMediaInstanceId>
+        <relationshipType>33</relationshipType>
+        <format>4</format>
+        <size>23</size>
+        <fileUrl>http://download.xbox.com/content/images/66acd000-77fe-1000-9115-d802545407df/1033/boxartlg.jpg</fileUrl>
+      </image>
+      <image>
+        <imageMediaInstanceId>4BC2EA1C-1DA2-41EE-816D-A35020F148F9</imageMediaInstanceId>
+        <relationshipType>27</relationshipType>
+        <format>5</format>
+        <size>15</size>
+        <fileUrl>http://download.xbox.com/content/images/66acd000-77fe-1000-9115-d802545407df/1033/banner.png</fileUrl>
+      </image>
+      <image>
+        <imageMediaInstanceId>220A138B-15C2-4727-9DF9-D577E30DC2A9</imageMediaInstanceId>
+        <relationshipType>23</relationshipType>
+        <format>5</format>
+        <size>14</size>
+        <fileUrl>http://download.xbox.com/content/images/66acd000-77fe-1000-9115-d802545407df/1033/tile.png</fileUrl>
+      </image>
+    </images>
+  </a:entry>
+</a:feed>
+
