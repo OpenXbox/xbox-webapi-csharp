@@ -29,7 +29,7 @@ namespace XboxWebApi.Services.Model.X360Marketplace
             Store = 1;
             PageSize = 25;
             PageNum = 1;
-            DetailView = CatalogDetailLevel.IncludeBanner;
+            DetailView = CatalogDetailLevel.IncludeBoxart;
             OfferFilterLevel = 1;
             CategoryIDs = 3027;
             OrderBy = 1;
