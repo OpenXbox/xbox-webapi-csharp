@@ -10,8 +10,8 @@ namespace XboxWebApi.Services.Api
 {
     public class PeopleService : XblService
     {
-        public PeopleService(XblConfiguration config)
-            : base(config, "https://social.xboxlive.com")
+        public PeopleService(IXblConfiguration config, IRestSharpEx httpClient)
+            : base(config, "https://social.xboxlive.com", httpClient)
         {
             Headers = new NameValueCollection()
             {
@@ -23,8 +23,8 @@ namespace XboxWebApi.Services.Api
         {
             RestRequestEx request = new RestRequestEx("users/me/people", Method.GET);
             request.AddHeaders(Headers);
-            IRestResponse<PeopleResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<PeopleResponse>(request);
+
+            IRestResponse<PeopleResponse> response = HttpClient.Execute<PeopleResponse>(request);
             return response.Data;
         }
 
@@ -32,8 +32,8 @@ namespace XboxWebApi.Services.Api
         {
             RestRequestEx request = new RestRequestEx("users/me/summary", Method.GET);
             request.AddHeaders(Headers);
-            IRestResponse<PeopleSummaryResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<PeopleSummaryResponse>(request);
+
+            IRestResponse<PeopleSummaryResponse> response = HttpClient.Execute<PeopleSummaryResponse>(request);
             return response.Data;
         }
 
@@ -41,8 +41,8 @@ namespace XboxWebApi.Services.Api
         {
             RestRequestEx request = new RestRequestEx($"users/xuid({xuid})/summary", Method.GET);
             request.AddHeaders(Headers);
-            IRestResponse<PeopleSummaryResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<PeopleSummaryResponse>(request);
+
+            IRestResponse<PeopleSummaryResponse> response = HttpClient.Execute<PeopleSummaryResponse>(request);
             return response.Data;
         }
 
@@ -50,8 +50,8 @@ namespace XboxWebApi.Services.Api
         {
             RestRequestEx request = new RestRequestEx($"users/gt({gamertag})/summary", Method.GET);
             request.AddHeaders(Headers);
-            IRestResponse<PeopleSummaryResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<PeopleSummaryResponse>(request);
+
+            IRestResponse<PeopleSummaryResponse> response = HttpClient.Execute<PeopleSummaryResponse>(request);
             return response.Data;
         }
 
@@ -61,8 +61,8 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx("users/me/people/xuids", Method.POST);
             request.AddHeaders(Headers);
             request.AddJsonBody(body, JsonNamingStrategy.CamelCase);
-            IRestResponse<PeopleResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<PeopleResponse>(request);
+
+            IRestResponse<PeopleResponse> response = HttpClient.Execute<PeopleResponse>(request);
             return response.Data;
         }
     }

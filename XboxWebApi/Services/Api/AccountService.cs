@@ -10,17 +10,17 @@ namespace XboxWebApi.Services.Api
 {
     public class AccountService : XblService
     {
-        public AccountService(XblConfiguration config)
-            : base(config, "https://accounts.xboxlive.com")
-        {   
+        public AccountService(IXblConfiguration config, IRestSharpEx httpClient)
+            : base(config, "https://accounts.xboxlive.com", httpClient)
+        {
         }
 
         public AccountResponse GetAccount()
         {
             RestRequestEx request = new RestRequestEx("users/current/profile", Method.GET);
             // No headers
-            IRestResponse<AccountResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<AccountResponse>(request);
+            IRestResponse<AccountResponse> response = HttpClient.Execute<AccountResponse>(request);
+
             return response.Data;
         }
 
@@ -28,8 +28,8 @@ namespace XboxWebApi.Services.Api
         {
             RestRequestEx request = new RestRequestEx($"family/memberXuid({xuid})", Method.GET);
             // No headers
-            IRestResponse<AccountResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<AccountResponse>(request);
+            IRestResponse<AccountResponse> response = HttpClient.Execute<AccountResponse>(request);
+
             return response.Data;
         }
     }

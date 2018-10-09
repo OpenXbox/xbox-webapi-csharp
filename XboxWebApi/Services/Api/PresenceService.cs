@@ -10,8 +10,8 @@ namespace XboxWebApi.Services.Api
 {
     public class PresenceService : XblService
     {
-        public PresenceService(XblConfiguration config)
-            : base(config, "https://userpresence.xboxlive.com")
+        public PresenceService(IXblConfiguration config, IRestSharpEx httpClient)
+            : base(config, "https://userpresence.xboxlive.com", httpClient)
         {
             Headers = new NameValueCollection()
             {
@@ -25,8 +25,8 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx("users/me", Method.GET);
             request.AddHeaders(Headers);
             request.AddQueryParameters(query.GetQuery());
-            IRestResponse<PresenceResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<PresenceResponse>(request);
+
+            IRestResponse<PresenceResponse> response = HttpClient.Execute<PresenceResponse>(request);
             return response.Data;
         }
 
@@ -36,8 +36,8 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx($"users/xuid({xuid})", Method.GET);
             request.AddHeaders(Headers);
             request.AddQueryParameters(query.GetQuery());
-            IRestResponse<PresenceResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<PresenceResponse>(request);
+
+            IRestResponse<PresenceResponse> response = HttpClient.Execute<PresenceResponse>(request);
             return response.Data;
         }
 
@@ -49,8 +49,8 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx("users/batch", Method.POST);
             request.AddHeaders(Headers);
             request.AddJsonBody(body, JsonNamingStrategy.CamelCase);
-            IRestResponse<PresenceBatchResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<PresenceBatchResponse>(request);
+
+            IRestResponse<PresenceBatchResponse> response = HttpClient.Execute<PresenceBatchResponse>(request);
             return response.Data;
         }
     }

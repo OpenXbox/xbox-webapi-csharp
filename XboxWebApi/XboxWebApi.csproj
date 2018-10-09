@@ -20,13 +20,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Common\" />
-    <Folder Include="Extensions\" />
     <Folder Include="Authentication\" />
     <Folder Include="Authentication\Token\" />
     <Folder Include="Authentication\Model\" />
-    <Folder Include="Services\" />
-    <Folder Include="Services\Api\" />
-    <Folder Include="Services\Model\" />
     <Folder Include="Services\Model\People\" />
     <Folder Include="Services\Model\Presence\" />
     <Folder Include="Services\Model\Profile\" />

@@ -10,8 +10,8 @@ namespace XboxWebApi.Services.Api
 {
     public class MessageService : XblService
     {
-        public MessageService(XblConfiguration config)
-            : base(config, "https://msg.xboxlive.com")
+        public MessageService(IXblConfiguration config, IRestSharpEx httpClient)
+            : base(config, "https://msg.xboxlive.com", httpClient)
         {
             Headers = new NameValueCollection()
             {
@@ -27,8 +27,8 @@ namespace XboxWebApi.Services.Api
                 $"users/xuid({Config.XboxUserId})/inbox", Method.GET);
             request.AddHeaders(Headers);
             request.AddQueryParameters(query.GetQuery());
-            IRestResponse<MessageInboxResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<MessageInboxResponse>(request);
+
+            IRestResponse<MessageInboxResponse> response = HttpClient.Execute<MessageInboxResponse>(request);
             return response.Data;
         }
 
@@ -37,8 +37,8 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx(
                 $"users/xuid({Config.XboxUserId})/inbox/{messageId}", Method.GET);
             request.AddHeaders(Headers);
-            IRestResponse<MessageResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<MessageResponse>(request);
+
+            IRestResponse<MessageResponse> response = HttpClient.Execute<MessageResponse>(request);
             return response.Data;
         }
 
@@ -50,8 +50,8 @@ namespace XboxWebApi.Services.Api
                 $"users/xuid({Config.XboxUserId})/inbox/conversations", Method.GET);
             request.AddHeaders(Headers);
             request.AddQueryParameters(query.GetQuery());
-            IRestResponse<ConversationsResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<ConversationsResponse>(request);
+
+            IRestResponse<ConversationsResponse> response = HttpClient.Execute<ConversationsResponse>(request);
             return response.Data;
         }
 
@@ -60,8 +60,8 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx(
                 $"users/xuid({Config.XboxUserId})/inbox/conversations/xuid({xuid})", Method.GET);
             request.AddHeaders(Headers);
-            IRestResponse<ConversationResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<ConversationResponse>(request);
+
+            IRestResponse<ConversationResponse> response = HttpClient.Execute<ConversationResponse>(request);
             return response.Data;
         }
 
@@ -70,8 +70,8 @@ namespace XboxWebApi.Services.Api
             RestRequestEx request = new RestRequestEx(
                 $"users/xuid({Config.XboxUserId})/inbox/{messageId}", Method.DELETE);
             request.AddHeaders(Headers);
-            IRestResponse response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute(request);
+
+            IRestResponse response = HttpClient.Execute(request);
         }
 
         private void SendMessage(MessageSendRequest postData)
@@ -80,8 +80,8 @@ namespace XboxWebApi.Services.Api
                 $"users/xuid({Config.XboxUserId})/outbox", Method.POST);
             request.AddHeaders(Headers);
             request.AddJsonBody(postData, JsonNamingStrategy.CamelCase);
-            IRestResponse response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute(request);
+
+            IRestResponse response = HttpClient.Execute(request);
         }
 
         public void SendMessage(string messageText, ulong[] xuids)
