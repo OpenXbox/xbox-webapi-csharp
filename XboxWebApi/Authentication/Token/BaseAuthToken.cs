@@ -10,11 +10,15 @@ namespace XboxWebApi.Authentication
 		public string Jwt { get; set; }
 		public DateTime Issued { get; set; }
 		public DateTime Expires { get; set; }
+
+		[JsonIgnoreAttribute]
 		public XboxUserInformation UserInformation { get; set; }
 
+		[JsonIgnoreAttribute]
 		public bool Valid => 
 			(Expires != null && Expires > DateTime.Now);
 		
+		[JsonIgnoreAttribute]
 		public bool HasUserInformation =>
 			(UserInformation != null);
 

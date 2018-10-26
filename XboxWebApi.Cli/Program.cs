@@ -10,7 +10,8 @@ namespace XboxWebApi.Cli
     {
         static void Main(string[] args)
         {
-            string responseUrl;
+            FileStream tokenOutputFile = null;
+            string responseUrl = null;
             string requestUrl = AuthenticationService.GetWindowsLiveAuthenticationUrl();
 
             if (args.Length < 1)
@@ -18,14 +19,27 @@ namespace XboxWebApi.Cli
                 Console.WriteLine("1) Open following URL in your WebBrowser:\n\n{0}\n\n" +
                                     "2) Authenticate with your Microsoft Account\n" +
                                     "3) Paste returned URL from addressbar: \n", requestUrl);
+                return;
+            }
 
-                // Caveat: Console.ReadLine() is limited to 254 chars on Windows
-                responseUrl = Console.ReadLine();
-            }
-            else
+            if (args.Length == 2)
             {
-                responseUrl = args[0];
+                string tokenOutputFilePath = args[1];
+                try
+                {
+                    tokenOutputFile = new FileStream(tokenOutputFilePath, FileMode.Create);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Failed to open token outputfile \'{0}\', error: {1}",
+                        tokenOutputFile , e.Message);
+                    return;
+                }
+                Console.WriteLine("Storing tokens to file \'{0}\' on successful auth",
+                    tokenOutputFilePath);
             }
+
+            responseUrl = args[0];
 
             WindowsLiveResponse response = AuthenticationService.ParseWindowsLiveResponse(responseUrl);
 
@@ -38,6 +52,12 @@ namespace XboxWebApi.Cli
                 Console.WriteLine("Authentication failed!");
                 return;
             }
+
+            if (tokenOutputFile != null)
+            {
+                authenticator.DumpToFile(tokenOutputFile);
+            }
+
             Console.WriteLine(authenticator.XToken);
             Console.WriteLine(authenticator.UserInformation);
         }

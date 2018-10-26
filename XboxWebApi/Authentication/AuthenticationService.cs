@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using XboxWebApi.Common;
 using XboxWebApi.Extensions;
 using XboxWebApi.Authentication.Model;
+using System.Text;
 
 namespace XboxWebApi.Authentication
 {
@@ -140,6 +141,21 @@ namespace XboxWebApi.Authentication
 			}
 
 			return new WindowsLiveResponse(queryParams);
+		}
+
+		public static AuthenticationService LoadFromFile(FileStream fs)
+		{
+			byte[] buf = new byte[fs.Length];
+			fs.Read(buf, 0, buf.Length);
+			string s = Encoding.UTF8.GetString(buf);
+			return (AuthenticationService)JsonConvert.DeserializeObject(s);
+		}
+
+		public void DumpToFile(FileStream fs)
+		{
+			string s = JsonConvert.SerializeObject(this, Formatting.Indented);
+			byte[] bytes = Encoding.UTF8.GetBytes(s);
+			fs.Write(bytes, 0, bytes.Length);
 		}
     }
 }
