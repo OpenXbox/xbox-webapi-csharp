@@ -10,8 +10,8 @@ namespace XboxWebApi.Services.Api
 {
     public class ProfileService : XblService
     {
-        public ProfileService(XblConfiguration config)
-            : base(config, "https://profile.xboxlive.com")
+        public ProfileService(IXblConfiguration config, IRestSharpEx httpClient)
+            : base(config, "https://profile.xboxlive.com", httpClient)
         {
             Headers = new NameValueCollection()
             {
@@ -32,8 +32,8 @@ namespace XboxWebApi.Services.Api
             ProfilesRequest body = new ProfilesRequest(xuids, profileSettings);
             request.AddHeaders(Headers);
             request.AddJsonBody(body, JsonNamingStrategy.CamelCase);
-            IRestResponse<ProfileResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<ProfileResponse>(request);
+
+            IRestResponse<ProfileResponse> response = HttpClient.Execute<ProfileResponse>(request);
             return response.Data;
         }
 
@@ -49,8 +49,8 @@ namespace XboxWebApi.Services.Api
             ProfileRequestQuery query = new ProfileRequestQuery(profileSettings);
             request.AddHeaders(Headers);
             request.AddQueryParameters(query.GetQuery());
-            IRestResponse<ProfileResponse> response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute<ProfileResponse>(request);
+
+            IRestResponse<ProfileResponse> response = HttpClient.Execute<ProfileResponse>(request);
             return response.Data;
         }
 

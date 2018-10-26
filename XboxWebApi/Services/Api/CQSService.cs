@@ -10,8 +10,8 @@ namespace XboxWebApi.Services.Api
 {
     public class CQSService : XblService
     {
-        public CQSService(XblConfiguration config)
-            : base(config, "https://cqs.xboxlive.com")
+        public CQSService(IXblConfiguration config, IRestSharpEx httpClient)
+            : base(config, "https://cqs.xboxlive.com", httpClient)
         {
             Headers = new NameValueCollection(){
                 {"Cache-Control", "no-cache"},
@@ -32,8 +32,8 @@ namespace XboxWebApi.Services.Api
                 $"epg/{localeInfo}/lineups/{headendId}/channels", Method.GET);
             request.AddHeaders(Headers);
             request.AddQueryParameters(query.GetQuery());
-            IRestResponse response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute(request);
+
+            IRestResponse response = HttpClient.Execute(request);
             Console.WriteLine(response.Content);
         }
 
@@ -47,8 +47,8 @@ namespace XboxWebApi.Services.Api
                 $"epg/{localeInfo}/lineups/{headendId}/programs", Method.GET);
             request.AddHeaders(Headers);
             request.AddQueryParameters(query.GetQuery());
-            IRestResponse response = ClientFactory(JsonNamingStrategy.CamelCase)
-                .Execute(request);
+
+            IRestResponse response = HttpClient.Execute(request);
             Console.WriteLine(response.Content);
         }
     }

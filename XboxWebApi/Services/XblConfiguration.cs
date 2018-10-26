@@ -6,7 +6,7 @@ using XboxWebApi.Authentication.Model;
 
 namespace XboxWebApi.Services
 {
-    public class XblConfiguration
+    public class XblConfiguration : IXblConfiguration
     {
         public XToken xToken { get; internal set; }
         public XblLocale Locale { get; internal set; }
