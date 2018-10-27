@@ -40,10 +40,8 @@ Save token to JSON
 using System.IO;
 using XboxWebApi.Common;
 
-string xtoken_json = NewtonsoftJsonSerializer.Default.Serialize(authenticator.XToken);
-string refresh_json = NewtonsoftJsonSerializer.Default.Serialize(authenticator.RefreshToken);
-File.WriteAllText("xtoken.json", json);
-File.WriteAllText("refresh_token.json", json);
+FileStream fs = new FileStream("tokens.json", FileMode.Create);
+authenticator.DumpToFile(fs);
 ```
 
 Load token from JSON
@@ -53,10 +51,8 @@ using System.IO;
 using XboxWebApi.Common;
 using XboxWebApi.Authentication;
 
-string xtoken_json = File.ReadAllText("xtoken.json");
-string refresh_json = File.ReadAllText("refresh_token.json");
-XToken xtoken = NewtonsoftJsonSerializer.Default.Deserialize<XToken>(xtoken_json);
-RefreshToken refresh_token = NewtonsoftJsonSerializer.Default.Deserialize<RefreshToken>(refresh_json);
+FileStream fs = new FileStream("tokens.json", FileMode.Open);
+AuthenticationService authenticator = AuthenticationService.LoadFromFile(fs);
 ```
 
 Example Api Usage
@@ -69,13 +65,13 @@ using XboxWebApi.Services;
 using XboxWebApi.Services.Api;
 using XboxWebApi.Services.Model;
 
-if (!xtoken.Valid)
+if (!authenticator.XToken.Valid)
 {
     Console.WriteLine("Token expired, please refresh / reauthenticate");
     return;
 }
 
-XblConfiguration xblConfig = new XblConfiguration(xtoken, XblLanguage.United_States);
+XblConfiguration xblConfig = new XblConfiguration(authenticator.XToken, XblLanguage.United_States);
 
 PresenceService presenceService = new PresenceService(xblConfig);
 PeopleService peopleService = new PeopleService(xblConfig);
