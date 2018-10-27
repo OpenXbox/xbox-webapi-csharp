@@ -12,13 +12,13 @@ namespace XboxWebApi.Authentication
 {
 	public class AuthenticationService
 	{
-		public AccessToken AccessToken { get; internal set; }
-		public RefreshToken RefreshToken { get; internal set; }
-		public UserToken UserToken { get; internal set; }
-		public DeviceToken DeviceToken { get; internal set; }
-		public TitleToken TitleToken { get; internal set; }
-		public XToken XToken { get; internal set; }
-		public XboxUserInformation UserInformation { get; internal set; }
+		public AccessToken AccessToken { get; set; }
+		public RefreshToken RefreshToken { get; set; }
+		public UserToken UserToken { get; set; }
+		public DeviceToken DeviceToken { get; set; }
+		public TitleToken TitleToken { get; set; }
+		public XToken XToken { get; set; }
+		public XboxUserInformation UserInformation { get; set; }
 
 		public AuthenticationService(AccessToken accessToken, RefreshToken refreshToken)
 		{
@@ -148,7 +148,7 @@ namespace XboxWebApi.Authentication
 			byte[] buf = new byte[fs.Length];
 			fs.Read(buf, 0, buf.Length);
 			string s = Encoding.UTF8.GetString(buf);
-			return (AuthenticationService)JsonConvert.DeserializeObject(s);
+			return JsonConvert.DeserializeObject<AuthenticationService>(s);
 		}
 
 		public void DumpToFile(FileStream fs)

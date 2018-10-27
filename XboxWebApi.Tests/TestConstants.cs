@@ -26,6 +26,35 @@ namespace XboxWebApi.UnitTests
                 };
             }
         }
+
+        public static AccessToken TestAccessToken
+        {
+            get
+            {
+                return new AccessToken()
+                {
+                    Issued = new DateTime(2018, 09, 09),
+                    Expires = new DateTime(2099, 11, 12),
+                    Jwt = "eyABCAccessToken$$",
+                    UserInformation = null
+                };
+            }
+        }
+
+        public static RefreshToken TestRefreshToken
+        {
+            get
+            {
+                return new RefreshToken()
+                {
+                    Issued = new DateTime(2018, 09, 09),
+                    Expires = new DateTime(2099, 11, 22),
+                    Jwt = "eyABCRefreshToken**",
+                    UserInformation = null
+                };
+            }
+        }
+
         public static XToken TestXToken
         {
             get

@@ -1,0 +1,33 @@
+{
+    "AccessToken": {
+      "Jwt": "EwAYA+AccessToken",
+      "Issued": "2018-10-27T11:07:51.107166Z",
+      "Expires": "2099-10-28T12:07:51.107166Z"
+    },
+    "RefreshToken": {
+      "Jwt": "MCX8RefreshToken$$",
+      "Issued": "2018-10-27T11:07:51.107166Z",
+      "Expires": "2099-11-10T12:07:51.107166Z"
+    },
+    "UserToken": {
+      "Jwt": "eyJlUserToken",
+      "Issued": "2018-10-27T11:07:51.8903671Z",
+      "Expires": "2099-11-10T11:07:51.8903671Z"
+    },
+    "DeviceToken": null,
+    "TitleToken": null,
+    "XToken": {
+      "Jwt": "eyJXToken",
+      "Issued": "2018-10-27T11:07:52.9302907Z",
+      "Expires": "2018-10-27T12:07:52.9302907Z"
+    },
+    "UserInformation": {
+      "agg": "Adult",
+      "gtg": "xboxWebapiGamertag",
+      "prv": "191 193 196 199 200 201",
+      "usr": "123",
+      "utr": "180",
+      "xid": 234568092345979,
+      "uhs": "162358993400365622"
+    }
+  }

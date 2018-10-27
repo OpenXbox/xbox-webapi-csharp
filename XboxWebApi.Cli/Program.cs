@@ -56,6 +56,7 @@ namespace XboxWebApi.Cli
             if (tokenOutputFile != null)
             {
                 authenticator.DumpToFile(tokenOutputFile);
+                tokenOutputFile.Close();
             }
 
             Console.WriteLine(authenticator.XToken);
