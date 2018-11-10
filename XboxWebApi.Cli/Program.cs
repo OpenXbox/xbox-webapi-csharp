@@ -42,9 +42,7 @@ namespace XboxWebApi.Cli
             responseUrl = args[0];
 
             WindowsLiveResponse response = AuthenticationService.ParseWindowsLiveResponse(responseUrl);
-
-            AuthenticationService authenticator = new AuthenticationService(
-                new AccessToken(response), new RefreshToken(response));
+            AuthenticationService authenticator = new AuthenticationService(response);
 
             bool success = authenticator.Authenticate();
             if (!success)

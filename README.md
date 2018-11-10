@@ -24,8 +24,7 @@ string requestUrl = AuthenticationService.GetWindowsLiveAuthenticationUrl();
 WindowsLiveResponse response = AuthenticationService.ParseWindowsLiveResponse(
     "<Received Redirection URL>");
 
-AuthenticationService authenticator = new AuthenticationService(
-    new AccessToken(response), new RefreshToken(response));
+AuthenticationService authenticator = new AuthenticationService(response);
 
 if (!authenticator.Authenticate())
     throw new Exception("Authentication failed!");
@@ -42,6 +41,7 @@ using XboxWebApi.Common;
 
 FileStream fs = new FileStream("tokens.json", FileMode.Create);
 authenticator.DumpToFile(fs);
+fs.Close();
 ```
 
 Load token from JSON
@@ -53,6 +53,7 @@ using XboxWebApi.Authentication;
 
 FileStream fs = new FileStream("tokens.json", FileMode.Open);
 AuthenticationService authenticator = AuthenticationService.LoadFromFile(fs);
+fs.Close();
 ```
 
 Example Api Usage

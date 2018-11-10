@@ -20,6 +20,12 @@ namespace XboxWebApi.Authentication
 		public XToken XToken { get; set; }
 		public XboxUserInformation UserInformation { get; set; }
 
+		public AuthenticationService(WindowsLiveResponse wlResponse)
+		{
+			AccessToken = new AccessToken(wlResponse);
+			RefreshToken = new RefreshToken(wlResponse);
+		}
+
 		public AuthenticationService(AccessToken accessToken, RefreshToken refreshToken)
 		{
 			AccessToken = accessToken;
