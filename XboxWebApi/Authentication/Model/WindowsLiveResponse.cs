@@ -15,12 +15,13 @@ namespace XboxWebApi.Authentication.Model
 		public string TokenType;
 
 		// Not part of actual response data
-		public DateTime CreationTime { get; private set; }
+		public DateTime CreationTime { get; set; }
 
 		public WindowsLiveResponse()
 		{
 			CreationTime = DateTime.Now;
 		}
+
 		public WindowsLiveResponse(NameValueCollection queryParams)
 		{
 			CreationTime = DateTime.Now;
