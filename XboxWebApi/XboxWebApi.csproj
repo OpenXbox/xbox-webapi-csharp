@@ -12,8 +12,7 @@
     <Version>0.2.6</Version>
     <PackageProjectUrl>https://github.com/OpenXbox/xbox-webapi-csharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/OpenXbox/xbox-webapi-csharp</RepositoryUrl>
-    <PackageLicenseExpression></PackageLicenseExpression>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <license type="GPL-3.0-only"/>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>full</DebugType>
