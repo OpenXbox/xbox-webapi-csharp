@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.Extensions.Logging;
 using XboxWebApi.Authentication;
 using XboxWebApi.Authentication.Model;
+using XboxWebApi.Authentication.Headless;
 
 using CommandLine;
 using System.Threading.Tasks;
@@ -21,6 +22,17 @@ namespace XboxWebApi.Cli
 
             [Value(0, MetaName = "responseurl", HelpText = "Response URL.")]
             public string ResponseUrl{ get; set; }
+        }
+        [Verb("headless", HelpText = "Authenticate headless via email/password.")]
+        class HeadlessOptions {
+            [Option('t', "tokenfile", Required = false, HelpText = "Filepath to save tokens to.")]
+            public string TokenFilepath { get; set; }
+
+            [Value(0, MetaName = "email", Required = true, HelpText = "Email address of Microsoft account.")]
+            public string Email { get; set; }
+
+            [Value(1, MetaName = "password", Required = true, HelpText = "Password of Microsoft account.")]
+            public string Password { get; set; }
         }
         [Verb("refresh", HelpText = "Refresh tokens via refresh token json.")]
         class RefreshOptions {
@@ -70,6 +82,65 @@ namespace XboxWebApi.Cli
             return 0;
         }
 
+        static async Task<int> ChooseAuthStrategy(IEnumerable<string> choices)
+        {
+            Console.WriteLine("Choose desired auth strategy");
+            foreach (var choice in choices)
+            {
+                Console.WriteLine(choice);
+            }
+            string userChoice = await Console.In.ReadLineAsync();
+            return Int32.Parse(userChoice);
+        }
+
+        static async Task<string> VerifyProof(string prompt)
+        {
+            Console.WriteLine(prompt);
+            return await Console.In.ReadLineAsync();
+        }
+
+        static async Task<string> EnterOneTimeCode(string prompt)
+        {
+            Console.WriteLine(prompt);
+            return await Console.In.ReadLineAsync();
+        }
+
+        static async Task<int> RunHeadlessAuth(HeadlessOptions args)
+        {
+            Console.WriteLine(":: Headless ::");
+            var authUrl = AuthenticationService.GetWindowsLiveAuthenticationUrl();
+            try
+            {
+                var headlessAuthService = new HeadlessAuthenticationService(authUrl);
+                headlessAuthService.ChooseAuthStrategyCallback = ChooseAuthStrategy;
+                headlessAuthService.VerifyPosessionCallback = VerifyProof;
+                headlessAuthService.EnterOneTimeCodeCallback = EnterOneTimeCode;
+
+                var response = await headlessAuthService.AuthenticateAsync(args.Email, args.Password);
+                var authenticator = new AuthenticationService(response);
+                bool success = await authenticator.AuthenticateAsync();
+                Console.WriteLine("Authentication succeeded");
+
+                if (!String.IsNullOrEmpty(args.TokenFilepath))
+                {
+                    success = await authenticator.DumpToJsonFileAsync(args.TokenFilepath);
+                    if (!success)
+                    {
+                        Console.WriteLine("Failed to dump tokens to {}", args.TokenFilepath);
+                        return 2;
+                    }
+                    Console.WriteLine("Tokens saved to {}", args.TokenFilepath);
+                }
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("Headless authentication failed, error: " + exc.Message);
+                return 1;
+            }
+
+            return 0;
+        }
+
         static async Task<int> RunTokenRefresh(RefreshOptions args)
         {
             Console.WriteLine(":: Token refresh ::");
@@ -92,9 +163,10 @@ namespace XboxWebApi.Cli
 
         async static Task Main(string[] args)
         {
-            await CommandLine.Parser.Default.ParseArguments<OAuthOptions, RefreshOptions>(args)
+            await CommandLine.Parser.Default.ParseArguments<OAuthOptions, HeadlessOptions, RefreshOptions>(args)
 	                    .MapResult(
                             (OAuthOptions opts) => RunOAuth(opts),
+                            (HeadlessOptions opts) => RunHeadlessAuth(opts),
                             (RefreshOptions opts) => RunTokenRefresh(opts),
                             errs => Task.FromResult(1));
         }
