@@ -2,7 +2,6 @@ using System;
 using System.Collections.Specialized;
 using NUnit.Framework;
 using XboxWebApi.Common;
-using XboxWebApi.Extensions;
 using XboxWebApi.Services.Model;
 
 namespace XboxWebApi.UnitTests.Api
@@ -38,7 +37,6 @@ namespace XboxWebApi.UnitTests.Api
             DateTime expectedDate0 = new DateTime(2017,08,05,17,03,51).AddTicks(7279382);
             DateTime expectedDate1 = new DateTime(2017,07,22,12,55,43).AddTicks(7301922);
             DateTime expectedDate2 = new DateTime(2013,07,01,15,10,28).AddTicks(4600000);
-            Assert.IsInstanceOf(typeof(IStringable), response);
             Assert.AreEqual(3, response.TotalCount);
 
             Assert.IsNotEmpty(response.People);
@@ -85,7 +83,6 @@ namespace XboxWebApi.UnitTests.Api
                 .Create(JsonNamingStrategy.CamelCase)
                 .Deserialize<PeopleSummaryResponse>(json);
 
-            Assert.IsInstanceOf(typeof(IStringable), response);
             Assert.IsFalse(response.IsTargetFollowingCaller);
             Assert.IsFalse(response.HasCallerMarkedTargetAsFavorite);
             Assert.IsTrue(response.IsCallerFollowingTarget);

@@ -1,10 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model.X360Marketplace
 {
-    public class CatalogItemRequestQuery
+    public class CatalogItemRequestQuery : Common.IHttpRequestQuery
     {
         public int[] BodyTypes;
         public int DetailLevel;
@@ -43,9 +43,9 @@ namespace XboxWebApi.Services.Model.X360Marketplace
             };
         }
 
-        public NameValueCollection GetQuery()
+        public Dictionary<string,string> GetQuery()
         {
-            return new NameValueCollection()
+            return new Dictionary<string,string>()
             {
                 {"bodytypes", String.Join(".", Array.ConvertAll(BodyTypes, x => x.ToString()))},
                 {"detailview", "detaillevel" + DetailLevel},

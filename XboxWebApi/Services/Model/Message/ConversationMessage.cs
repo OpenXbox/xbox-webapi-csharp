@@ -1,9 +1,8 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class ConversationMessage : IStringable
+    public class ConversationMessage
     {
         public int MessageId;
         public int SenderTitleId;

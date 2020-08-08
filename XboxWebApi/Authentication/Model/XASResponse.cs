@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Authentication.Model
 {
-    public class XASResponse : IStringable
+    public class XASResponse
     {
 		public string Token;
 		public DateTime IssueInstant;

@@ -1,9 +1,8 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class MessageResponse : IStringable
+    public class MessageResponse
     {
         public InboxMessageHeader Header;
         public string MessageText;

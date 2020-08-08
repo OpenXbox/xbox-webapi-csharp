@@ -1,9 +1,8 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class PeopleSummaryResponse : IStringable
+    public class PeopleSummaryResponse
     {
         public int TargetFollowingCount;
         public int TargetFollowerCount;

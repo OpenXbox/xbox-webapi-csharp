@@ -1,14 +1,13 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class Conversation : IStringable
+    public class Conversation
     {
         public ConversationHeader Summary;
         public ConversationMessage[] Messages;
     }
-    public class ConversationResponse : IStringable
+    public class ConversationResponse
     {
         public Conversation Conversation;
     }

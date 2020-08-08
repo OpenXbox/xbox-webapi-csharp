@@ -1,9 +1,8 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class ConversationHeader : IStringable
+    public class ConversationHeader
     {
         public ulong SenderXuid;
         public string SenderGamerTag;
@@ -15,7 +14,7 @@ namespace XboxWebApi.Services.Model
         public ConversationMessage[] Messages; // Not set for Conversations
     }
 
-    public class ConversationsResponse : IStringable
+    public class ConversationsResponse
     {
         public ConversationHeader[] Results;
     }

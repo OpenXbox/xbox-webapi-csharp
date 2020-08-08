@@ -1,15 +1,14 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class ProfileSettingElement : IStringable
+    public class ProfileSettingElement
     {
         public ProfileSetting Id;
         public string Value;
     }
 
-    public class ProfileUser : IStringable
+    public class ProfileUser
     {
         public ulong Id;
         public ulong HostId;
@@ -17,7 +16,7 @@ namespace XboxWebApi.Services.Model
         public bool IsSponsoredUser;
     }
 
-    public class ProfileResponse : IStringable
+    public class ProfileResponse
     {
         public ProfileUser[] ProfileUsers;
     }

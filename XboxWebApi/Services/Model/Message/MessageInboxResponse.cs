@@ -1,9 +1,8 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class MessageInboxResponse : IStringable
+    public class MessageInboxResponse
     {
         public InboxMessage[] Results;
         public PagingInfo PagingInfo;

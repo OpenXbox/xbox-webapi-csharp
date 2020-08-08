@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Specialized;
 using Newtonsoft.Json;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Authentication.Model
 {
-	public class WindowsLiveResponse : IStringable
+	public class WindowsLiveResponse
 	{        
 		public string AccessToken;
 		public int ExpiresIn;

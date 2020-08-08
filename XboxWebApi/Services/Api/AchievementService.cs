@@ -1,92 +1,92 @@
 using System;
-using System.Collections.Specialized;
-using RestSharp;
-using XboxWebApi.Extensions;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+using XboxWebApi.Common;
 using XboxWebApi.Services.Model.Achievement;
 
 namespace XboxWebApi.Services.Api
 {
     public class AchievementService : XblService
     {
-        private NameValueCollection Headers_XONE;
-        private NameValueCollection Headers_X360;
+        private Dictionary<string,string> Headers_XONE;
+        private Dictionary<string,string> Headers_X360;
 
-        public AchievementService(IXblConfiguration config, IRestSharpEx httpClient)
-            : base(config, "https://achievements.xboxlive.com", httpClient)
+        public AchievementService(IXblConfiguration config)
+            : base(config, "https://achievements.xboxlive.com/")
         {
-            Headers_X360 = new NameValueCollection(){
+            Headers_X360 = new Dictionary<string,string>(){
                 {"x-xbl-contract-version", "1"}
             };
 
-            Headers_XONE = new NameValueCollection(){
+            Headers_XONE = new Dictionary<string,string>(){
                 {"x-xbl-contract-version", "2"}
             };
         }
 
-        public void GetAchievementDetail(ulong xuid, string scid, string achievementId)
+        public async Task<HttpResponseMessage> GetAchievementDetailAsync(ulong xuid, string scid, string achievementId)
         {
-            RestRequestEx request = new RestRequestEx(
-                $"users/xuid({xuid})/achievements/{scid}/{achievementId}", Method.GET);
-            request.AddHeaders(Headers_XONE);
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                $"users/xuid({xuid})/achievements/{scid}/{achievementId}");
+            request.Headers.Add(Headers_XONE);
             
-            IRestResponse response = HttpClient.Execute(request);
-            Console.WriteLine(response.Content);
+            var response = await HttpClient.SendAsync(request);
+            return response;
         }
 
-        public void GetAchievementGameprogress(ulong xuid, ulong titleId)
+        public async Task<HttpResponseMessage> GetAchievementGameprogressAsync(ulong xuid, ulong titleId)
         {
             AchievementRequestQuery query = new AchievementRequestQuery(titleId);
-            RestRequestEx request = new RestRequestEx(
-                $"users/xuid({xuid})/achievements", Method.GET);
-            request.AddHeaders(Headers_XONE);
-            request.AddQueryParameters(query.GetQuery());
+            var request = new HttpRequestMessage(HttpMethod.Get, $"users/xuid({xuid})/achievements");
+            request.Headers.Add(Headers_XONE);
+            request.AddQueryParameter(query.GetQuery());
             
-            IRestResponse response = HttpClient.Execute(request);
-            Console.WriteLine(response.Content);
+            var response = await HttpClient.SendAsync(request);
+            return response;
         }
 
-        public void GetAchievementsRecentProgress(ulong xuid)
+        public async Task<HttpResponseMessage> GetAchievementsRecentProgressAsync(ulong xuid)
         {
-            RestRequestEx request = new RestRequestEx(
-                $"users/xuid({xuid})/history/titles", Method.GET);
-            request.AddHeaders(Headers_XONE);
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                $"users/xuid({xuid})/history/titles");
+            request.Headers.Add(Headers_XONE);
 
-            IRestResponse response = HttpClient.Execute(request);
-            Console.WriteLine(response.Content);
+            var response = await HttpClient.SendAsync(request);
+            return response;
         }
 
-        public void GetAchievementsXbox360All(ulong xuid, ulong titleId)
+        public async Task<HttpResponseMessage> GetAchievementsXbox360AllAsync(ulong xuid, ulong titleId)
         {
             AchievementRequestQuery query = new AchievementRequestQuery(titleId);
-            RestRequestEx request = new RestRequestEx(
-                $"users/xuid({xuid})/titleachievements", Method.GET);
-            request.AddHeaders(Headers_X360);
-            request.AddQueryParameters(query.GetQuery());
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                $"users/xuid({xuid})/titleachievements");
+            request.Headers.Add(Headers_X360);
+            request.AddQueryParameter(query.GetQuery());
             
-            IRestResponse response = HttpClient.Execute(request);
-            Console.WriteLine(response.Content);
+            var response = await HttpClient.SendAsync(request);
+            return response;
         }
 
-        public void GetAchievementsXbox360Earned(ulong xuid, ulong titleId)
+        public async Task<HttpResponseMessage> GetAchievementsXbox360EarnedAsync(ulong xuid, ulong titleId)
         {
             AchievementRequestQuery query = new AchievementRequestQuery(titleId);
-            RestRequestEx request = new RestRequestEx(
-                $"users/xuid({xuid})/achievements", Method.GET);
-            request.AddHeaders(Headers_X360);
-            request.AddQueryParameters(query.GetQuery());
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                $"users/xuid({xuid})/achievements");
+            request.Headers.Add(Headers_X360);
+            request.AddQueryParameter(query.GetQuery());
 
-            IRestResponse response = HttpClient.Execute(request);
-            Console.WriteLine(response.Content);
+            var response = await HttpClient.SendAsync(request);
+            return response;
         }
 
-        public void GetAchievementsXbox360RecentProgress(ulong xuid)
+        public async Task<HttpResponseMessage> GetAchievementsXbox360RecentProgressAsync(ulong xuid)
         {
-            RestRequestEx request = new RestRequestEx(
-                $"users/xuid({xuid})/history/titles", Method.GET);
-            request.AddHeaders(Headers_X360);
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                $"users/xuid({xuid})/history/titles");
+            request.Headers.Add(Headers_X360);
 
-            IRestResponse response = HttpClient.Execute(request);
-            Console.WriteLine(response.Content);
+            var response = await HttpClient.SendAsync(request);
+            return response;
         }
     }
 }

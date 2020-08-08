@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Specialized;
-using XboxWebApi.Extensions;
+using System.Collections.Generic;
 
 namespace XboxWebApi.Services.Model.CQS
 {
-    public class CQSLineupRequestQuery
+    public class CQSLineupRequestQuery : Common.IHttpRequestQuery
     {
         public string Desired;
 
@@ -13,9 +12,9 @@ namespace XboxWebApi.Services.Model.CQS
            Desired = CQSVesperType.MobileLineup;
         }
 
-        public NameValueCollection GetQuery()
+        public Dictionary<string,string> GetQuery()
         {
-            return new NameValueCollection()
+            return new Dictionary<string,string>()
             {
                 {"desired", Desired}
             };

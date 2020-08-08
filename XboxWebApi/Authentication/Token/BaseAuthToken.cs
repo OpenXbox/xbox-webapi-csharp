@@ -1,11 +1,10 @@
 ﻿using System;
 using Newtonsoft.Json;
-using XboxWebApi.Extensions;
 using XboxWebApi.Authentication.Model;
 
 namespace XboxWebApi.Authentication
 {
-	public class BaseAuthToken : IStringable
+	public class BaseAuthToken
 	{
 		public string Jwt { get; set; }
 		public DateTime Issued { get; set; }

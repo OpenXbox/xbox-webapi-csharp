@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Specialized;
-using RestSharp;
 using XboxWebApi.Authentication;
 using XboxWebApi.Authentication.Model;
 

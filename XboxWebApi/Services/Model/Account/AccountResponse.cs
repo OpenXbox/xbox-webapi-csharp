@@ -1,9 +1,8 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model.Account
 {
-    public class AccountHomeAddress : IStringable
+    public class AccountHomeAddress
     {
         public string Street1;
         public string Street2;
@@ -13,7 +12,7 @@ namespace XboxWebApi.Services.Model.Account
         public string Country;
     }
 
-    public class AccountResponse : IStringable
+    public class AccountResponse
     {
         public DateTime DateOfBirth;
         public string FirstName;

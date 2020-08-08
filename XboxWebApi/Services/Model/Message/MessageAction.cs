@@ -1,7 +1,6 @@
 using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
@@ -11,7 +10,7 @@ namespace XboxWebApi.Services.Model
         FiveByFive,
         DeepLink
     }
-    public class MessageAction : IStringable
+    public class MessageAction
     {
         public int Id;
         public string VuiGui;

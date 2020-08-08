@@ -1,9 +1,8 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class People : IStringable
+    public class People
     {
         public ulong Xuid;
         public DateTime AddedDateTimeUtc;

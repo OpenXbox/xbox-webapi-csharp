@@ -1,64 +1,102 @@
 ﻿using System;
 using System.IO;
-using XboxWebApi.Extensions;
+using Microsoft.Extensions.Logging;
 using XboxWebApi.Authentication;
 using XboxWebApi.Authentication.Model;
+
+using CommandLine;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace XboxWebApi.Cli
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            FileStream tokenOutputFile = null;
-            string responseUrl = null;
-            string requestUrl = AuthenticationService.GetWindowsLiveAuthenticationUrl();
+        static ILogger logger = XboxWebApi.Common.Logging.Factory.CreateLogger<Program>();
+        
+        [Verb("oauth", HelpText = "Authenticate via webbrowser / OAUTH2.")]
+        class OAuthOptions {
+            [Option('t', "tokenfile", Required = false, HelpText = "Filepath to save tokens to.")]
+            public string TokenFilepath { get; set; }
 
-            if (args.Length < 1)
+            [Value(0, MetaName = "responseurl", HelpText = "Response URL.")]
+            public string ResponseUrl{ get; set; }
+        }
+        [Verb("refresh", HelpText = "Refresh tokens via refresh token json.")]
+        class RefreshOptions {
+            [Value(0, MetaName = "tokenfile", Required = true, HelpText = "Filepath to load/save tokens.")]
+            public string TokenFilepath { get; set; }
+        }
+        
+        static async Task<int> RunOAuth(OAuthOptions args)
+        {
+            Console.WriteLine(":: OAUTH ::");
+            if (String.IsNullOrEmpty(args.ResponseUrl))
             {
+                string requestUrl = AuthenticationService.GetWindowsLiveAuthenticationUrl();
                 Console.WriteLine("1) Open following URL in your WebBrowser:\n\n{0}\n\n" +
                                     "2) Authenticate with your Microsoft Account\n" +
-                                    "3) Paste returned URL from addressbar: \n", requestUrl);
-                return;
+                                    "3) Execute application again with returned URL from addressbar as the argument\n", requestUrl);
             }
-
-            if (args.Length == 2)
+            else
             {
-                string tokenOutputFilePath = args[1];
                 try
                 {
-                    tokenOutputFile = new FileStream(tokenOutputFilePath, FileMode.Create);
+                    WindowsLiveResponse response = AuthenticationService.ParseWindowsLiveResponse(args.ResponseUrl);
+                    AuthenticationService authenticator = new AuthenticationService(response);
+
+                    Console.WriteLine("Attempting authentication with Xbox Live...");
+                    bool success = await authenticator.AuthenticateAsync();
+                    Console.WriteLine("Authentication succeeded");
+
+                    if (!String.IsNullOrEmpty(args.TokenFilepath))
+                    {
+                        success = await authenticator.DumpToJsonFileAsync(args.TokenFilepath);
+                        if (!success)
+                        {
+                            Console.WriteLine("Failed to dump tokens to {}", args.TokenFilepath);
+                            return 2;
+                        }
+                        Console.WriteLine("Tokens saved to {}", args.TokenFilepath);
+                    }
                 }
-                catch (Exception e)
+                catch (Exception exc)
                 {
-                    Console.WriteLine("Failed to open token outputfile \'{0}\', error: {1}",
-                        tokenOutputFile , e.Message);
-                    return;
+                    Console.WriteLine("Authentication failed! Error: " + exc.Message);
+                    return 1;
                 }
-                Console.WriteLine("Storing tokens to file \'{0}\' on successful auth",
-                    tokenOutputFilePath);
             }
 
-            responseUrl = args[0];
+            return 0;
+        }
 
-            WindowsLiveResponse response = AuthenticationService.ParseWindowsLiveResponse(responseUrl);
-            AuthenticationService authenticator = new AuthenticationService(response);
-
-            bool success = authenticator.Authenticate();
-            if (!success)
+        static async Task<int> RunTokenRefresh(RefreshOptions args)
+        {
+            Console.WriteLine(":: Token refresh ::");
+            try
             {
-                Console.WriteLine("Authentication failed!");
-                return;
+                Console.WriteLine("Loading tokens from file...");
+                var authService = await AuthenticationService.LoadFromJsonFileAsync(args.TokenFilepath);
+                Console.WriteLine("Refreshing tokens...");
+                await authService.AuthenticateAsync();
+                Console.WriteLine("Saving refreshed tokens to file...");
+                await authService.DumpToJsonFileAsync(args.TokenFilepath);
             }
-
-            if (tokenOutputFile != null)
+            catch (Exception exc)
             {
-                authenticator.DumpToFile(tokenOutputFile);
-                tokenOutputFile.Close();
+                Console.WriteLine("Failed to refresh tokens, error: {}", exc);
+                return 1;
             }
+            return 0;
+        }
 
-            Console.WriteLine(authenticator.XToken);
-            Console.WriteLine(authenticator.UserInformation);
+        async static Task Main(string[] args)
+        {
+            await CommandLine.Parser.Default.ParseArguments<OAuthOptions, RefreshOptions>(args)
+	                    .MapResult(
+                            (OAuthOptions opts) => RunOAuth(opts),
+                            (RefreshOptions opts) => RunTokenRefresh(opts),
+                            errs => Task.FromResult(1));
         }
     }
 }

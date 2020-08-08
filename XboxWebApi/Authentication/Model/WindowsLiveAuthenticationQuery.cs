@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Specialized;
-using XboxWebApi.Authentication;
+using System.Collections.Generic;
 
 namespace XboxWebApi.Authentication.Model
 {
-    public class WindowsLiveAuthenticationQuery
+    public class WindowsLiveAuthenticationQuery : Common.IHttpRequestQuery
     {
         public string ResponseType { get; internal set; }
         public string Scope { get; internal set; }
@@ -28,9 +27,9 @@ namespace XboxWebApi.Authentication.Model
             Locale = locale;
         }
 
-        public NameValueCollection GetQuery()
+        public Dictionary<string,string> GetQuery()
         {
-            return new NameValueCollection{
+            return new Dictionary<string,string>{
                 {"response_type", ResponseType},
                 {"scope", Scope},
                 {"redirect_uri", RedirectUri},

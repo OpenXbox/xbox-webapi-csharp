@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Specialized;
+using System.Collections.Generic;
 using NUnit.Framework;
 using XboxWebApi.Common;
-using XboxWebApi.Extensions;
 using XboxWebApi.Services.Model;
 
 namespace XboxWebApi.UnitTests.Api
@@ -19,7 +18,7 @@ namespace XboxWebApi.UnitTests.Api
         public void CreatePresenceQuery()
         {
             PresenceRequestQuery query = new PresenceRequestQuery(PresenceLevel.All);
-            NameValueCollection nv = query.GetQuery();
+            Dictionary<string,string> nv = query.GetQuery();
 
             Assert.IsNotEmpty(nv);
             Assert.AreEqual(1, nv.Count);
@@ -48,7 +47,6 @@ namespace XboxWebApi.UnitTests.Api
                 .Deserialize<PresenceResponse>(json);
 
             DateTime expectedDate = new DateTime(2018,6,6,19,55,10).AddTicks(5125990);
-            Assert.IsInstanceOf(typeof(IStringable), response);
             Assert.AreEqual(2580478784034343, response.Xuid);
             Assert.AreEqual(PresenceState.Online, response.State);
             Assert.IsNull(response.LastSeen);
@@ -75,7 +73,6 @@ namespace XboxWebApi.UnitTests.Api
             DateTime expectedDate1 = new DateTime(2018,6,6,19,38,14).AddTicks(0770062);
             DateTime expectedDate2 = new DateTime(2018,5,30,20,38,4).AddTicks(3994143);
 
-            Assert.IsInstanceOf(typeof(IStringable), response);
             Assert.AreEqual(3, response.Count);
 
             Assert.AreEqual(PresenceState.Offline, response[0].State);

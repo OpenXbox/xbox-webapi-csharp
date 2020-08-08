@@ -1,9 +1,8 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class PresenceLastSeen : IStringable
+    public class PresenceLastSeen
     {
         public DeviceType DeviceType;
         public ulong TitleId;

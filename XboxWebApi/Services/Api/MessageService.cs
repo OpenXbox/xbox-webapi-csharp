@@ -1,109 +1,108 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
 using XboxWebApi.Common;
-using XboxWebApi.Extensions;
 using XboxWebApi.Services.Model;
 
 namespace XboxWebApi.Services.Api
 {
     public class MessageService : XblService
     {
-        public MessageService(IXblConfiguration config, IRestSharpEx httpClient)
-            : base(config, "https://msg.xboxlive.com", httpClient)
+        public MessageService(IXblConfiguration config)
+            : base(config, "https://msg.xboxlive.com/")
         {
-            Headers = new NameValueCollection()
+            Headers = new Dictionary<string,string>()
             {
                 {"x-xbl-contract-version", "1"}
             };
         }
 
-        public MessageInboxResponse GetMessages(int skipItems=0, int maxItems=100)
+        public async Task<MessageInboxResponse> GetMessagesAsync(int skipItems=0, int maxItems=100)
         {
             MessageInboxRequestQuery query = new MessageInboxRequestQuery(
                 skipItems, maxItems);
-            RestRequestEx request = new RestRequestEx(
-                $"users/xuid({Config.XboxUserId})/inbox", Method.GET);
-            request.AddHeaders(Headers);
-            request.AddQueryParameters(query.GetQuery());
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                $"users/xuid({Config.XboxUserId})/inbox");
+            request.Headers.Add(Headers);
+            request.AddQueryParameter(query.GetQuery());
 
-            IRestResponse<MessageInboxResponse> response = HttpClient.Execute<MessageInboxResponse>(request);
-            return response.Data;
+            var response = await HttpClient.SendAsync(request);
+            return await response.Content.ReadAsJsonAsync<MessageInboxResponse>();
         }
 
-        public MessageResponse GetMessage(int messageId)
+        public async Task<MessageResponse> GetMessageAsync(int messageId)
         {
-            RestRequestEx request = new RestRequestEx(
-                $"users/xuid({Config.XboxUserId})/inbox/{messageId}", Method.GET);
-            request.AddHeaders(Headers);
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                $"users/xuid({Config.XboxUserId})/inbox/{messageId}");
+            request.Headers.Add(Headers);
 
-            IRestResponse<MessageResponse> response = HttpClient.Execute<MessageResponse>(request);
-            return response.Data;
+            var response = await HttpClient.SendAsync(request);
+            return await response.Content.ReadAsJsonAsync<MessageResponse>();
         }
 
-        public ConversationsResponse GetConversations(int skipItems=0, int maxItems=100)
+        public async Task<ConversationsResponse> GetConversationsAsync(int skipItems=0, int maxItems=100)
         {
             MessageInboxRequestQuery query = new MessageInboxRequestQuery(
                 skipItems, maxItems);
-            RestRequestEx request = new RestRequestEx(
-                $"users/xuid({Config.XboxUserId})/inbox/conversations", Method.GET);
-            request.AddHeaders(Headers);
-            request.AddQueryParameters(query.GetQuery());
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                $"users/xuid({Config.XboxUserId})/inbox/conversations");
+            request.Headers.Add(Headers);
+            request.AddQueryParameter(query.GetQuery());
 
-            IRestResponse<ConversationsResponse> response = HttpClient.Execute<ConversationsResponse>(request);
-            return response.Data;
+            var response = await HttpClient.SendAsync(request);
+            return await response.Content.ReadAsJsonAsync<ConversationsResponse>();
         }
 
-        public ConversationResponse GetConversation(ulong xuid)
+        public async Task<ConversationResponse> GetConversationAsync(ulong xuid)
         {
-            RestRequestEx request = new RestRequestEx(
-                $"users/xuid({Config.XboxUserId})/inbox/conversations/xuid({xuid})", Method.GET);
-            request.AddHeaders(Headers);
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                $"users/xuid({Config.XboxUserId})/inbox/conversations/xuid({xuid})");
+            request.Headers.Add(Headers);
 
-            IRestResponse<ConversationResponse> response = HttpClient.Execute<ConversationResponse>(request);
-            return response.Data;
+            var response = await HttpClient.SendAsync(request);
+            return await response.Content.ReadAsJsonAsync<ConversationResponse>();
         }
 
-        public void DeleteMessage(int messageId)
+        public async Task DeleteMessageAsync(int messageId)
         {
-            RestRequestEx request = new RestRequestEx(
-                $"users/xuid({Config.XboxUserId})/inbox/{messageId}", Method.DELETE);
-            request.AddHeaders(Headers);
+            var request = new HttpRequestMessage(HttpMethod.Delete,
+                $"users/xuid({Config.XboxUserId})/inbox/{messageId}");
+            request.Headers.Add(Headers);
 
-            IRestResponse response = HttpClient.Execute(request);
+            var response = await HttpClient.SendAsync(request);
         }
 
-        private void SendMessage(MessageSendRequest postData)
+        private async Task SendMessageAsync(MessageSendRequest postData)
         {
-            RestRequestEx request = new RestRequestEx(
-                $"users/xuid({Config.XboxUserId})/outbox", Method.POST);
-            request.AddHeaders(Headers);
-            request.AddJsonBody(postData, JsonNamingStrategy.CamelCase);
+            var request = new HttpRequestMessage(HttpMethod.Post,
+                $"users/xuid({Config.XboxUserId})/outbox");
+            request.Headers.Add(Headers);
+            request.Content = new JsonContent(postData, JsonNamingStrategy.CamelCase);
 
-            IRestResponse response = HttpClient.Execute(request);
+            var response = await HttpClient.SendAsync(request);
         }
 
-        public void SendMessage(string messageText, ulong[] xuids)
+        public async Task SendMessageAsync(string messageText, ulong[] xuids)
         {
             MessageSendRequest postData = new MessageSendRequest(messageText, xuids);
-            SendMessage(postData);
+            await SendMessageAsync(postData);
         }
 
-        public void SendMessage(string messageText, string[] gamertags)
+        public async Task SendMessageAsync(string messageText, string[] gamertags)
         {
             MessageSendRequest postData = new MessageSendRequest(messageText, gamertags);
-            SendMessage(postData);
+            await SendMessageAsync(postData);
         }
 
-        public void SendMessage(string messageText, string gamertag)
+        public async Task SendMessageAsync(string messageText, string gamertag)
         {
-            SendMessage(messageText, new string[]{gamertag});
+            await SendMessageAsync(messageText, new string[]{gamertag});
         }
 
-        public void SendMessage(string messageText, ulong xuid)
+        public async Task SendMessageAsync(string messageText, ulong xuid)
         {
-            SendMessage(messageText, new ulong[]{xuid});
+            await SendMessageAsync(messageText, new ulong[]{xuid});
         }
     }
 }

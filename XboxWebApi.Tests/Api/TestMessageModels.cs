@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Specialized;
+using System.Collections.Generic;
 using NUnit.Framework;
 using XboxWebApi.Common;
-using XboxWebApi.Extensions;
 using XboxWebApi.Services.Model;
 
 namespace XboxWebApi.UnitTests.Api
@@ -19,7 +18,7 @@ namespace XboxWebApi.UnitTests.Api
         public void CreateMessageInboxRequestQuery()
         {
             MessageInboxRequestQuery query = new MessageInboxRequestQuery(10, 90);
-            NameValueCollection nv = query.GetQuery();
+            Dictionary<string,string> nv = query.GetQuery();
 
             Assert.IsNotEmpty(nv);
             Assert.AreEqual(2, nv.Count);
@@ -58,8 +57,6 @@ namespace XboxWebApi.UnitTests.Api
             DateTime expectedDateExpiration0 = new DateTime(2018,06,19,20,08,27);
             DateTime expectedDateSent1 = new DateTime(2018,05,08,01,07,35);
             DateTime expectedDateExpiration1 = new DateTime(2018,06,07,01,07,35);
-
-            Assert.IsInstanceOf(typeof(IStringable), response);
 
             Assert.IsNotNull(response.PagingInfo);
             Assert.AreEqual(3, response.PagingInfo.TotalItems);
@@ -124,7 +121,6 @@ namespace XboxWebApi.UnitTests.Api
             DateTime expectSent = new DateTime(2017, 6, 9, 19, 1, 59);
             DateTime expectExpiration = new DateTime(2017, 7, 9, 19, 1, 59);
 
-            Assert.IsInstanceOf(typeof(IStringable), response);
             Assert.IsNotNull(response.Header);
             Assert.AreEqual("Here is some full message text, no cut-off text",
                 response.MessageText);
@@ -158,8 +154,6 @@ namespace XboxWebApi.UnitTests.Api
             ConversationResponse response = NewtonsoftJsonSerializer
                 .Create(JsonNamingStrategy.CamelCase)
                 .Deserialize<ConversationResponse>(json);
-            
-            Assert.IsInstanceOf(typeof(IStringable), response);
 
             Assert.IsNotNull(response.Conversation);
             Assert.IsNotNull(response.Conversation.Summary);
@@ -177,7 +171,6 @@ namespace XboxWebApi.UnitTests.Api
                 .Create(JsonNamingStrategy.CamelCase)
                 .Deserialize<ConversationsResponse>(json);
             
-            Assert.IsInstanceOf(typeof(IStringable), response);
             Assert.IsNotNull(response.Results);
             Assert.IsNotEmpty(response.Results);
             Assert.AreEqual(2, response.Results.Length);
