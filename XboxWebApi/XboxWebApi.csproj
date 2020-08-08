@@ -11,7 +11,9 @@
     <PackageTags>xbox live api authentication</PackageTags>
     <Version>0.2.6</Version>
     <PackageProjectUrl>https://github.com/OpenXbox/xbox-webapi-csharp</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/OpenXbox/xbox-webapi-csharp/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/OpenXbox/xbox-webapi-csharp</RepositoryUrl>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>full</DebugType>
