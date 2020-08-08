@@ -51,8 +51,16 @@ namespace XboxWebApi.Authentication
         public async Task<bool> AuthenticateAsync()
         {
             WindowsLiveResponse windowsLiveTokens = await RefreshLiveTokenAsync(RefreshToken);
-            AccessToken = new AccessToken(windowsLiveTokens);
-            RefreshToken = new RefreshToken(windowsLiveTokens);
+            //make sure that the access token is actually present in the token refresh before trying to change it
+            if (!string.IsNullOrWhiteSpace(windowsLiveTokens.AccessToken))
+            {
+                AccessToken = new AccessToken(windowsLiveTokens);
+            }
+            //make sure that the refresh token is actually present in the token refresh before trying to change it
+            if (!string.IsNullOrWhiteSpace(windowsLiveTokens.RefreshToken))
+            {
+                RefreshToken = new RefreshToken(windowsLiveTokens);
+            }
             UserToken = await AuthenticateXASUAsync(AccessToken);
             XToken = await AuthenticateXSTSAsync(UserToken, DeviceToken, TitleToken);
             UserInformation = XToken.UserInformation;
