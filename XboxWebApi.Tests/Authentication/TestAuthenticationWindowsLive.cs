@@ -19,7 +19,7 @@ namespace XboxWebApi.UnitTests.Authentication
             string expectedUrl = TestData["WindowsLiveAuthUrl.url"];
             string authenticationUrl = AuthenticationService.GetWindowsLiveAuthenticationUrl();
 
-            Assert.AreEqual(authenticationUrl, expectedUrl);
+            Assert.AreEqual(expectedUrl, authenticationUrl);
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace XboxWebApi.UnitTests.Authentication
             Assert.AreEqual(accessToken.Jwt, "EwAAA+pvBAAUKods63Ys1fGlwiccIFJ+9u");
             Assert.GreaterOrEqual(accessToken.Issued, dateBeforeParsing);
             Assert.GreaterOrEqual(accessToken.Expires, accessToken.Issued);
-            
+
             Assert.IsFalse(refreshToken.HasUserInformation);
             Assert.IsNull(refreshToken.UserInformation);
             Assert.IsTrue(refreshToken.Valid);
@@ -57,8 +57,8 @@ namespace XboxWebApi.UnitTests.Authentication
             string invalidUrl = "https://login.live.com/oauth20_invalid.srf?param=value";
 
             InvalidDataException ex = Assert.Throws<InvalidDataException>(
-                delegate {AuthenticationService.ParseWindowsLiveResponse(invalidUrl);});
-            
+                delegate { AuthenticationService.ParseWindowsLiveResponse(invalidUrl); });
+
             Assert.IsTrue(ex.Message.StartsWith("Invalid URL to parse"));
         }
 
@@ -68,8 +68,8 @@ namespace XboxWebApi.UnitTests.Authentication
             string invalidUrlFragment = "https://login.live.com/oauth20_desktop.srf?lc=1337";
 
             InvalidDataException ex = Assert.Throws<InvalidDataException>(
-                delegate {AuthenticationService.ParseWindowsLiveResponse(invalidUrlFragment);});
-            
+                delegate { AuthenticationService.ParseWindowsLiveResponse(invalidUrlFragment); });
+
             Assert.IsTrue(ex.Message.StartsWith("Invalid URL fragment"));
         }
 
@@ -81,7 +81,7 @@ namespace XboxWebApi.UnitTests.Authentication
                                  "#access_token=EwAAA%2bpvBAAUKods63Ys1fGlwiccIFJ%2b9u";
 
             InvalidDataException ex = Assert.Throws<InvalidDataException>(
-                delegate {AuthenticationService.ParseWindowsLiveResponse(responseUrl);});
+                delegate { AuthenticationService.ParseWindowsLiveResponse(responseUrl); });
             Assert.IsTrue(ex.Message.StartsWith("Key not found"));
         }
     }

@@ -157,7 +157,9 @@ namespace XboxWebApi.Authentication
             RestRequestEx request = new RestRequestEx("oauth20_authorize.srf", Method.GET);
             NameValueCollection nv = new Model.WindowsLiveAuthenticationQuery().GetQuery();
             request.AddQueryParameters(nv);
-            return client.BuildUri(request).ToString();
+            string url = client.BuildUri(request).ToString();
+
+            return System.Web.HttpUtility.UrlDecode(url);
         }
 
         public static WindowsLiveResponse ParseWindowsLiveResponse(string url)
