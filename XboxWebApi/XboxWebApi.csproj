@@ -6,10 +6,9 @@
     <Authors>Team OpenXbox</Authors>
     <Description>Unoffical C# Xbox WebAPI, includes support for authentication with Windows Live / Xbox Live.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Add WindowsLiveConstants and add asyncness to authentication</PackageReleaseNotes>
     <Copyright>Copyright 2018 (c) Team OpenXbox</Copyright>
     <PackageTags>xbox live api authentication</PackageTags>
-    <Version>0.2.6</Version>
+    <Version>0.3.0</Version>
     <PackageProjectUrl>https://github.com/OpenXbox/xbox-webapi-csharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/OpenXbox/xbox-webapi-csharp</RepositoryUrl>
     <license>GPL-3.0-only</license>
