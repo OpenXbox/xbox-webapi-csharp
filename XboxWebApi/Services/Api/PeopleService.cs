@@ -1,69 +1,68 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
 using XboxWebApi.Common;
-using XboxWebApi.Extensions;
 using XboxWebApi.Services.Model;
 
 namespace XboxWebApi.Services.Api
 {
     public class PeopleService : XblService
     {
-        public PeopleService(IXblConfiguration config, IRestSharpEx httpClient)
-            : base(config, "https://social.xboxlive.com", httpClient)
+        public PeopleService(IXblConfiguration config)
+            : base(config, "https://social.xboxlive.com/")
         {
-            Headers = new NameValueCollection()
+            Headers = new Dictionary<string,string>()
             {
                 {"x-xbl-contract-version", "1"}
             };
         }
 
-        public PeopleResponse GetFriends()
+        public async Task<PeopleResponse> GetFriendsAsync()
         {
-            RestRequestEx request = new RestRequestEx("users/me/people", Method.GET);
-            request.AddHeaders(Headers);
+            var request = new HttpRequestMessage(HttpMethod.Get, "users/me/people");
+            request.Headers.Add(Headers);
 
-            IRestResponse<PeopleResponse> response = HttpClient.Execute<PeopleResponse>(request);
-            return response.Data;
+            var response = await HttpClient.SendAsync(request);
+            return await response.Content.ReadAsJsonAsync<PeopleResponse>();
         }
 
-        public PeopleSummaryResponse GetFriendsSummary()
+        public async Task<PeopleSummaryResponse> GetFriendsSummaryAsync()
         {
-            RestRequestEx request = new RestRequestEx("users/me/summary", Method.GET);
-            request.AddHeaders(Headers);
+            var request = new HttpRequestMessage(HttpMethod.Get, "users/me/summary");
+            request.Headers.Add(Headers);
 
-            IRestResponse<PeopleSummaryResponse> response = HttpClient.Execute<PeopleSummaryResponse>(request);
-            return response.Data;
+            var response = await HttpClient.SendAsync(request);
+            return await response.Content.ReadAsJsonAsync<PeopleSummaryResponse>();
         }
 
-        public PeopleSummaryResponse GetFriendsSummary(ulong xuid)
+        public async Task<PeopleSummaryResponse> GetFriendsSummaryAsync(ulong xuid)
         {
-            RestRequestEx request = new RestRequestEx($"users/xuid({xuid})/summary", Method.GET);
-            request.AddHeaders(Headers);
+            var request = new HttpRequestMessage(HttpMethod.Get, $"users/xuid({xuid})/summary");
+            request.Headers.Add(Headers);
 
-            IRestResponse<PeopleSummaryResponse> response = HttpClient.Execute<PeopleSummaryResponse>(request);
-            return response.Data;
+            var response = await HttpClient.SendAsync(request);
+            return await response.Content.ReadAsJsonAsync<PeopleSummaryResponse>();
         }
 
-        public PeopleSummaryResponse GetFriendsSummary(string gamertag)
+        public async Task<PeopleSummaryResponse> GetFriendsSummaryAsync(string gamertag)
         {
-            RestRequestEx request = new RestRequestEx($"users/gt({gamertag})/summary", Method.GET);
-            request.AddHeaders(Headers);
+            var request = new HttpRequestMessage(HttpMethod.Get, $"users/gt({gamertag})/summary");
+            request.Headers.Add(Headers);
 
-            IRestResponse<PeopleSummaryResponse> response = HttpClient.Execute<PeopleSummaryResponse>(request);
-            return response.Data;
+            var response = await HttpClient.SendAsync(request);
+            return await response.Content.ReadAsJsonAsync<PeopleSummaryResponse>();
         }
 
-        public PeopleResponse GetFriendsOwnBatch(ulong[] xuids)
+        public async Task<PeopleResponse> GetFriendsOwnBatchAsync(ulong[] xuids)
         {
             PeopleBatchRequest body = new PeopleBatchRequest(xuids);
-            RestRequestEx request = new RestRequestEx("users/me/people/xuids", Method.POST);
-            request.AddHeaders(Headers);
-            request.AddJsonBody(body, JsonNamingStrategy.CamelCase);
+            var request = new HttpRequestMessage(HttpMethod.Post, "users/me/people/xuids");
+            request.Headers.Add(Headers);
+            request.Content = new JsonContent(body, JsonNamingStrategy.CamelCase);
 
-            IRestResponse<PeopleResponse> response = HttpClient.Execute<PeopleResponse>(request);
-            return response.Data;
+            var response = await HttpClient.SendAsync(request);
+            return await response.Content.ReadAsJsonAsync<PeopleResponse>();
         }
     }
 }

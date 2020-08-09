@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Specialized;
-using XboxWebApi.Extensions;
+using System.Collections.Generic;
 
 namespace XboxWebApi.Services.Model.Achievement
 {
-    public class AchievementRequestQuery
+    public class AchievementRequestQuery : Common.IHttpRequestQuery
     {
         public ulong TitleId;
 
@@ -13,9 +12,9 @@ namespace XboxWebApi.Services.Model.Achievement
            TitleId = titleId;
         }
 
-        public NameValueCollection GetQuery()
+        public Dictionary<string,string> GetQuery()
         {
-            return new NameValueCollection()
+            return new Dictionary<string,string>()
             {
                 {"titleId", TitleId.ToString()}
             };

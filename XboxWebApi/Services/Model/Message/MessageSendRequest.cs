@@ -1,5 +1,4 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
@@ -13,12 +12,12 @@ namespace XboxWebApi.Services.Model
         public string Xuid;
     }
 
-    public class MessageSendHeader : IStringable
+    public class MessageSendHeader
     {
         public object[] Recipients;
     }
 
-    public class MessageSendRequest : IStringable
+    public class MessageSendRequest
     {
         public MessageSendHeader Header;
         public string MessageText;

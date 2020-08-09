@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Text;
 using Newtonsoft.Json;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Authentication.Model
 {
-    public class XboxUserInformation : IStringable
+    public class XboxUserInformation
     {
 		[JsonProperty(PropertyName="agg")]
 		public string AgeGroup;

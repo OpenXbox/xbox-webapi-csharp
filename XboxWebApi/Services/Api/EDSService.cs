@@ -1,19 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
 using XboxWebApi.Common;
-using XboxWebApi.Extensions;
 using XboxWebApi.Services.Model.EDS;
 
 namespace XboxWebApi.Services.Api
 {
     public class EDSService : XblService
     {
-        public EDSService(IXblConfiguration config, IRestSharpEx httpClient)
-            : base(config, "https://eds.xboxlive.com", httpClient)
+        public EDSService(IXblConfiguration config)
+            : base(config, "https://eds.xboxlive.com/")
         {
-            Headers = new NameValueCollection(){
+            Headers = new Dictionary<string,string>(){
                 {"Cache-Control", "no-cache"},
                 {"Accept", "application/json"},
                 {"Pragma", "no-cache"},
@@ -25,31 +24,31 @@ namespace XboxWebApi.Services.Api
             };
         }
 
-        public void GetChannelList(Guid lineupId)
+        public async Task<HttpResponseMessage> GetChannelListAsync(Guid lineupId)
         {
             EDSLineupRequestQuery query = new EDSLineupRequestQuery(lineupId);
-            RestRequestEx request = new RestRequestEx(
-                $"media/{this.Config.Locale.Locale}/tvchannels", Method.GET);
-            request.AddHeaders(Headers);
-            request.AddQueryParameters(query.GetQuery());
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                $"media/{this.Config.Locale.Locale}/tvchannels");
+            request.Headers.Add(Headers);
+            request.AddQueryParameter(query.GetQuery());
 
-            IRestResponse response = HttpClient.Execute(request);
-            Console.WriteLine(response.Content);
+            var response = await HttpClient.SendAsync(request);
+            return response;
         }
 
-        public void GetSchedule(string localeInfo, Guid headendId,
+        public async Task<HttpResponseMessage> GetScheduleAsync(string localeInfo, Guid headendId,
                                 DateTime startDate, int durationMinutes,
                                 int channelSkip, int channelCount)
         {
             EDSScheduleRequestQuery query = new EDSScheduleRequestQuery(
                 startDate, durationMinutes, channelSkip, channelCount);
-            RestRequestEx request = new RestRequestEx(
-                $"epg/{localeInfo}/lineups/{headendId}/programs", Method.GET);
-            request.AddHeaders(Headers);
-            request.AddQueryParameters(query.GetQuery());
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                $"epg/{localeInfo}/lineups/{headendId}/programs");
+            request.Headers.Add(Headers);
+            request.AddQueryParameter(query.GetQuery());
 
-            IRestResponse response = HttpClient.Execute(request);
-            Console.WriteLine(response.Content);
+            var response = await HttpClient.SendAsync(request);
+            return response;
         }
     }
 }

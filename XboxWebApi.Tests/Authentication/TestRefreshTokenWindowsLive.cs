@@ -5,6 +5,7 @@ using NUnit.Framework;
 using XboxWebApi.Common;
 using XboxWebApi.Authentication;
 using XboxWebApi.Authentication.Model;
+using System.Collections.Generic;
 
 namespace XboxWebApi.UnitTests.Authentication
 {
@@ -37,16 +38,16 @@ namespace XboxWebApi.UnitTests.Authentication
                 Jwt = "eyAbcdef.Jwt"
             };
             WindowsLiveRefreshQuery refreshQuery = new WindowsLiveRefreshQuery(dummyToken);
-            NameValueCollection queryParams = refreshQuery.GetQuery();
+            Dictionary<string,string> queryParams = refreshQuery.GetQuery();
 
             Assert.AreEqual(queryParams.Count, 4);
             Assert.AreEqual(queryParams["client_id"], "0000000048093EE3");
             Assert.AreEqual(queryParams["grant_type"], "refresh_token");
             Assert.AreEqual(queryParams["refresh_token"], "eyAbcdef.Jwt");
             Assert.AreEqual(queryParams["scope"], "service::user.auth.xboxlive.com::MBI_SSL");
-            Assert.IsNull(queryParams["ClientId"]);
-            Assert.IsNull(queryParams["GrantType"]);
-            Assert.IsNull(queryParams["RefreshToken"]);
+            Assert.IsFalse(queryParams.ContainsKey("ClientId"));
+            Assert.IsFalse(queryParams.ContainsKey("GrantType"));
+            Assert.IsFalse(queryParams.ContainsKey("RefreshToken"));
         }
 
         [Test]

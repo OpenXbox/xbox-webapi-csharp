@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Specialized;
-using XboxWebApi.Extensions;
+using System.Collections.Generic;
 
 namespace XboxWebApi.Services.Model
 {
-    public class PresenceRequestQuery
+    public class PresenceRequestQuery : Common.IHttpRequestQuery
     {
         public PresenceLevel Level;
 
@@ -13,7 +12,7 @@ namespace XboxWebApi.Services.Model
             Level = level;
         }
 
-        public NameValueCollection GetQuery()
+        public Dictionary<string,string> GetQuery()
         {
             string value;
             switch (Level)
@@ -35,7 +34,7 @@ namespace XboxWebApi.Services.Model
                         $"Unhandled PresenceLevel: {Level}");
 
             }
-            return new NameValueCollection()
+            return new Dictionary<string,string>()
             {
                 {"level", value}
             };

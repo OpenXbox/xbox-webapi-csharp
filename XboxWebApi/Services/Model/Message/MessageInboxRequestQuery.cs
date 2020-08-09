@@ -1,10 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class MessageInboxRequestQuery
+    public class MessageInboxRequestQuery : Common.IHttpRequestQuery
     {
         public int SkipItems;
         public int MaxItems;
@@ -15,9 +15,9 @@ namespace XboxWebApi.Services.Model
            MaxItems = maxItems;
         }
 
-        public NameValueCollection GetQuery()
+        public Dictionary<string,string> GetQuery()
         {
-            return new NameValueCollection()
+            return new Dictionary<string,string>()
             {
                 {"skipItems", SkipItems.ToString()},
                 {"maxItems", MaxItems.ToString()}

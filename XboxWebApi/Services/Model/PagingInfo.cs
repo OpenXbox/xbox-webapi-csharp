@@ -1,9 +1,8 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class PagingInfo : IStringable
+    public class PagingInfo
     {
         public string ContinuationToken;
         public int TotalItems;

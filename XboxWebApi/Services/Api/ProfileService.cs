@@ -1,28 +1,26 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
 using XboxWebApi.Common;
-using XboxWebApi.Extensions;
 using XboxWebApi.Services.Model;
 
 namespace XboxWebApi.Services.Api
 {
     public class ProfileService : XblService
     {
-        public ProfileService(IXblConfiguration config, IRestSharpEx httpClient)
-            : base(config, "https://profile.xboxlive.com", httpClient)
+        public ProfileService(IXblConfiguration config)
+            : base(config, "https://profile.xboxlive.com/")
         {
-            Headers = new NameValueCollection()
+            Headers = new Dictionary<string,string>()
             {
                 {"x-xbl-contract-version", "2"}
             };
         }
 
-        public ProfileResponse GetProfilesBatch(ulong[] xuids, ProfileSetting[] settings = null)
+        public async Task<ProfileResponse> GetProfilesBatchAsync(ulong[] xuids, ProfileSetting[] settings = null)
         {
-            RestRequestEx request = new RestRequestEx("users/batch/profile/settings",
-                Method.POST);
+            var request = new HttpRequestMessage(HttpMethod.Post, "users/batch/profile/settings");
             ProfileSetting[] profileSettings = settings != null ? settings : new ProfileSetting[]
             {
                 ProfileSetting.AppDisplayName, ProfileSetting.Gamerscore,
@@ -30,16 +28,16 @@ namespace XboxWebApi.Services.Api
                 ProfileSetting.XboxOneRep, ProfileSetting.RealName
             };
             ProfilesRequest body = new ProfilesRequest(xuids, profileSettings);
-            request.AddHeaders(Headers);
-            request.AddJsonBody(body, JsonNamingStrategy.CamelCase);
+            request.Headers.Add(Headers);
+            request.Content = new JsonContent(body, JsonNamingStrategy.CamelCase);
 
-            IRestResponse<ProfileResponse> response = HttpClient.Execute<ProfileResponse>(request);
-            return response.Data;
+            var response = await HttpClient.SendAsync(request);
+            return await response.Content.ReadAsJsonAsync<ProfileResponse>();
         }
 
-        private ProfileResponse _GetProfile(string resource, ProfileSetting[] settings = null)
+        private async Task<ProfileResponse> _GetProfileAsync(string resource, ProfileSetting[] settings = null)
         {
-            RestRequestEx request = new RestRequestEx(resource, Method.GET);
+            var request = new HttpRequestMessage(HttpMethod.Get, resource);
             ProfileSetting[] profileSettings = settings != null ? settings : new ProfileSetting[]
             {
                 ProfileSetting.AppDisplayName, ProfileSetting.Gamerscore,
@@ -47,21 +45,21 @@ namespace XboxWebApi.Services.Api
                 ProfileSetting.XboxOneRep, ProfileSetting.RealName
             };
             ProfileRequestQuery query = new ProfileRequestQuery(profileSettings);
-            request.AddHeaders(Headers);
-            request.AddQueryParameters(query.GetQuery());
+            request.Headers.Add(Headers);
+            request.AddQueryParameter(query.GetQuery());
 
-            IRestResponse<ProfileResponse> response = HttpClient.Execute<ProfileResponse>(request);
-            return response.Data;
+            var response = await HttpClient.SendAsync(request);
+            return await response.Content.ReadAsJsonAsync<ProfileResponse>();
         }
 
-        public ProfileResponse GetProfile(ulong xuid, ProfileSetting[] settings = null)
+        public async Task<ProfileResponse> GetProfileAsync(ulong xuid, ProfileSetting[] settings = null)
         {
-            return _GetProfile($"users/xuid({xuid})/profile/settings", settings);
+            return await _GetProfileAsync($"users/xuid({xuid})/profile/settings", settings);
         }
 
-        public ProfileResponse GetProfile(string gamertag, ProfileSetting[] settings = null)
+        public async Task<ProfileResponse> GetProfileAsync(string gamertag, ProfileSetting[] settings = null)
         {
-            return _GetProfile($"users/gt({gamertag})/profile/settings", settings);
+            return await _GetProfileAsync($"users/gt({gamertag})/profile/settings", settings);
         }
     }
 }

@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Specialized;
+using System.Collections.Generic;
 using NUnit.Framework;
 using XboxWebApi.Common;
-using XboxWebApi.Extensions;
 using XboxWebApi.Services.Model;
 
 namespace XboxWebApi.UnitTests.Api
@@ -24,7 +23,7 @@ namespace XboxWebApi.UnitTests.Api
                 ProfileSetting.GameDisplayName,
                 ProfileSetting.PublicGamerpic
             });
-            NameValueCollection nv = query.GetQuery();
+            Dictionary<string,string> nv = query.GetQuery();
 
             Assert.IsNotEmpty(nv);
             Assert.AreEqual(1, nv.Count);
@@ -38,8 +37,6 @@ namespace XboxWebApi.UnitTests.Api
             ProfileResponse response = NewtonsoftJsonSerializer
                 .Create(JsonNamingStrategy.CamelCase)
                 .Deserialize<ProfileResponse>(json);
-            
-            Assert.IsInstanceOf(typeof(IStringable), response);
 
             Assert.IsNotNull(response.ProfileUsers);
             Assert.IsNotEmpty(response.ProfileUsers);

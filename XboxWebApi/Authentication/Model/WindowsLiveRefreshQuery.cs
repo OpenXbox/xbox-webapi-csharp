@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Specialized;
-using XboxWebApi.Authentication;
+using System.Collections.Generic;
 
 namespace XboxWebApi.Authentication.Model
 {
-    public class WindowsLiveRefreshQuery
+    public class WindowsLiveRefreshQuery : Common.IHttpRequestQuery
     {
         public string GrantType { get; internal set; }
         public string ClientId { get; internal set; }
@@ -23,9 +22,9 @@ namespace XboxWebApi.Authentication.Model
             RefreshToken = refreshToken.Jwt;
         }
 
-        public NameValueCollection GetQuery()
+        public Dictionary<string,string> GetQuery()
         {
-            return new NameValueCollection{
+            return new Dictionary<string,string>{
                 {"grant_type", GrantType},
                 {"client_id", ClientId},
                 {"scope", Scope},

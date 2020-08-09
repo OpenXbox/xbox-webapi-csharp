@@ -1,5 +1,4 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {

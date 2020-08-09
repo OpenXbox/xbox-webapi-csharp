@@ -1,36 +1,32 @@
 using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
 using XboxWebApi.Common;
-using XboxWebApi.Extensions;
 using XboxWebApi.Services.Model.Account;
 
 namespace XboxWebApi.Services.Api
 {
     public class AccountService : XblService
     {
-        public AccountService(IXblConfiguration config, IRestSharpEx httpClient)
-            : base(config, "https://accounts.xboxlive.com", httpClient)
+        public AccountService(IXblConfiguration config)
+            : base(config, "https://accounts.xboxlive.com/")
         {
         }
 
-        public AccountResponse GetAccount()
+        public async Task<AccountResponse> GetAccountAsync()
         {
-            RestRequestEx request = new RestRequestEx("users/current/profile", Method.GET);
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "users/current/profile");
             // No headers
-            IRestResponse<AccountResponse> response = HttpClient.Execute<AccountResponse>(request);
-
-            return response.Data;
+            var response = await HttpClient.SendAsync(request);
+            return await response.Content.ReadAsJsonAsync<AccountResponse>();
         }
 
-        public AccountResponse GetFamilyAccount(ulong xuid)
+        public async Task<AccountResponse> GetFamilyAccountAsync(ulong xuid)
         {
-            RestRequestEx request = new RestRequestEx($"family/memberXuid({xuid})", Method.GET);
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, $"family/memberXuid({xuid})");
             // No headers
-            IRestResponse<AccountResponse> response = HttpClient.Execute<AccountResponse>(request);
-
-            return response.Data;
+            var response = await HttpClient.SendAsync(request);
+            return await response.Content.ReadAsJsonAsync<AccountResponse>();
         }
     }
 }

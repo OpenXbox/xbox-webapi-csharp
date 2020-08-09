@@ -1,15 +1,14 @@
 using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class PresenceActivity : IStringable
+    public class PresenceActivity
     {
         public string RichPresence;
     }
-    public class PresenceTitle : IStringable
+    public class PresenceTitle
     {
         public ulong Id;
         public string Name;
@@ -19,7 +18,7 @@ namespace XboxWebApi.Services.Model
         public PresenceActivity Activity;
     }
 
-    public class PresenceDevice : IStringable
+    public class PresenceDevice
     {
         public DeviceType Type;
         public PresenceTitle[] Titles;

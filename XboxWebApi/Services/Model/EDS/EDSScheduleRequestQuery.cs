@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Specialized;
-using XboxWebApi.Extensions;
+using System.Collections.Generic;
 
 namespace XboxWebApi.Services.Model.EDS
 {
-    public class EDSScheduleRequestQuery
+    public class EDSScheduleRequestQuery : Common.IHttpRequestQuery
     {
         public DateTime StartDate;
 
@@ -13,9 +12,9 @@ namespace XboxWebApi.Services.Model.EDS
             StartDate = startDate;
         }
 
-        public NameValueCollection GetQuery()
+        public Dictionary<string,string> GetQuery()
         {
-            return new NameValueCollection()
+            return new Dictionary<string,string>()
             {
                 {"channelLineupId", StartDate.ToString()}
             };

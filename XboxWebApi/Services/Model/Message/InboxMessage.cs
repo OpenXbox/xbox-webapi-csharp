@@ -1,9 +1,8 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class InboxMessageHeader : IStringable
+    public class InboxMessageHeader
     {
         public int Id; // Not set for single message response
         public bool IsRead; // Not set for single message response
@@ -18,7 +17,7 @@ namespace XboxWebApi.Services.Model
         public string MessageFolderType;
     }
 
-    public class InboxMessage : IStringable
+    public class InboxMessage
     {
         public InboxMessageHeader Header;
         public string MessageSummary;

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Specialized;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model.CQS
 {

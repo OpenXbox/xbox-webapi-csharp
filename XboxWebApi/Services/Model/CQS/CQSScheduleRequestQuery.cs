@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Specialized;
-using XboxWebApi.Extensions;
+using System.Collections.Generic;
 
 namespace XboxWebApi.Services.Model.CQS
 {
-    public class CQSScheduleRequestQuery
+    public class CQSScheduleRequestQuery : Common.IHttpRequestQuery
     {
         public DateTime StartDate;
         public int DurationMinutes;
@@ -22,9 +21,9 @@ namespace XboxWebApi.Services.Model.CQS
             ChannelCount = channelCount;
         }
 
-        public NameValueCollection GetQuery()
+        public Dictionary<string,string> GetQuery()
         {
-            return new NameValueCollection()
+            return new Dictionary<string,string>()
             {
                 {"startDate", StartDate.ToString("o")},
                 {"durationMinutes", DurationMinutes.ToString()},

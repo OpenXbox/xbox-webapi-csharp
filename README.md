@@ -26,8 +26,16 @@ WindowsLiveResponse response = AuthenticationService.ParseWindowsLiveResponse(
 
 AuthenticationService authenticator = new AuthenticationService(response);
 
-if (!authenticator.Authenticate())
+string tokenFilePath = "tokens.json";
+bool success = await authenticator.AuthenticateAsync();
+if (!success)
     throw new Exception("Authentication failed!");
+
+success = await authenticator.DumpToJsonFileAsync(tokenFilePath);
+if (!success)
+    throw new Exception("Failed to dump tokens");
+
+Console.WriteLine("Tokens saved to {}", tokenFilePath);
 
 Console.WriteLine(authenticator.XToken);
 Console.WriteLine(authenticator.UserInformation);
@@ -36,24 +44,17 @@ Console.WriteLine(authenticator.UserInformation);
 Save token to JSON
 
 ```cs
-using System.IO;
-using XboxWebApi.Common;
+using XboxWebApi.Authentication;
 
-FileStream fs = new FileStream("tokens.json", FileMode.Create);
-authenticator.DumpToFile(fs);
-fs.Close();
+await authenticator.DumpToJsonFileAsync(tokenFilePath);
 ```
 
 Load token from JSON
 
 ```cs
-using System.IO;
-using XboxWebApi.Common;
 using XboxWebApi.Authentication;
 
-FileStream fs = new FileStream("tokens.json", FileMode.Open);
-AuthenticationService authenticator = AuthenticationService.LoadFromFile(fs);
-fs.Close();
+AuthenticationService authenticator = await AuthenticationService.LoadFromJsonFileAsync("tokens.json");
 ```
 
 Example Api Usage
@@ -61,10 +62,10 @@ Example Api Usage
 ```cs
 using System;
 using XboxWebApi.Common;
-using XboxWebApi.Extensions;
 using XboxWebApi.Services;
 using XboxWebApi.Services.Api;
 using XboxWebApi.Services.Model;
+using XboxWebApi.Authentication;
 
 if (!authenticator.XToken.Valid)
 {
@@ -79,9 +80,9 @@ PeopleService peopleService = new PeopleService(xblConfig);
 MessageService messageService = new MessageService(xblConfig);
 // ... more services
 
-var friends = peopleService.GetFriends();
-var presenceBatch = presenceService.GetPresenceBatch(friends.GetXuids());
-for (int i=0; i < friends.TotalCount; i++)
+var friends = await peopleService.GetFriendsAsync();
+var presenceBatch = await presenceService.GetPresenceBatchAsync(friends.GetXuids());
+for (int i = 0; i < friends.TotalCount; i++)
 {
     Console.WriteLine($"{presenceBatch[i].Xuid} is {presenceBatch[i].State}");
 }

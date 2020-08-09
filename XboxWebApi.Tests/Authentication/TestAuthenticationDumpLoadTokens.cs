@@ -4,6 +4,7 @@ using XboxWebApi.Authentication;
 using XboxWebApi.Authentication.Model;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace XboxWebApi.UnitTests.Authentication
 {
@@ -16,7 +17,7 @@ namespace XboxWebApi.UnitTests.Authentication
         }
 
         [Test]
-        public void TestLoadTokens()
+        public async Task TestLoadTokens()
         {
             string tokens = TestData["TokenDump.json"];
             byte[] tokensBytes = System.Text.Encoding.UTF8.GetBytes(tokens);
@@ -30,7 +31,7 @@ namespace XboxWebApi.UnitTests.Authentication
             AuthenticationService service = null;
             using (FileStream fs = new FileStream(tmpFilePath, FileMode.Open))
             {
-                service = AuthenticationService.LoadFromFile(fs);
+                service = await AuthenticationService.LoadFromJsonFileStream(fs);
             }
 
             Assert.IsNotNull(service.AccessToken);
@@ -49,7 +50,7 @@ namespace XboxWebApi.UnitTests.Authentication
         }
 
         [Test]
-        public void TestDumpTokens()
+        public async Task TestDumpTokens()
         {
             AuthenticationService service = new AuthenticationService(
                 TestConstants.TestAccessToken, TestConstants.TestRefreshToken);
@@ -57,7 +58,7 @@ namespace XboxWebApi.UnitTests.Authentication
             string tmpFilePath = Path.GetTempFileName();
             using(FileStream fs = new FileStream(tmpFilePath, FileMode.Create))
             {
-                service.DumpToFile(fs);
+                await AuthenticationService.DumpToJsonFileStream(service, fs);
             }
 
             using(FileStream fs = new FileStream(tmpFilePath, FileMode.Open))

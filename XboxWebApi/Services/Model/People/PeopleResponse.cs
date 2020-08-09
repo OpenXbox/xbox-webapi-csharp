@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class PeopleResponse : IStringable
+    public class PeopleResponse
     {
         public int TotalCount;
         public People[] People;

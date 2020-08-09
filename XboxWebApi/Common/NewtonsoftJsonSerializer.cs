@@ -1,40 +1,13 @@
 using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using RestSharp.Serializers;
-using RestSharp.Deserializers;
 
 namespace XboxWebApi.Common
 {
-    /*
-    ::: Serializing :::
-    private void SetJsonContent(RestRequest request, object obj)
-    {
-        request.RequestFormat = DataFormat.Json;
-        request.JsonSerializer = NewtonsoftJsonSerializer.Default;
-        request.AddJsonBody(obj);
-    }
-
-    ::: Deserializing :::
-    private RestClient CreateClient(string baseUrl)
-    {
-        var client = new RestClient(baseUrl);
-
-        // Override with Newtonsoft JSON Handler
-        client.AddHandler("application/json", NewtonsoftJsonSerializer.Default);
-        client.AddHandler("text/json", NewtonsoftJsonSerializer.Default);
-        client.AddHandler("text/x-json", NewtonsoftJsonSerializer.Default);
-        client.AddHandler("text/javascript", NewtonsoftJsonSerializer.Default);
-        client.AddHandler("*+json", NewtonsoftJsonSerializer.Default);
-
-        return client;
-    }
-    
-     */
     // Copyright (c) Philipp Wagner. All rights reserved.
     // Licensed under the MIT license. See LICENSE file in the project root for full license information.
     // Source: https://www.bytefish.de/blog/restsharp_custom_json_serializer
-    public class NewtonsoftJsonSerializer : ISerializer, IDeserializer
+    public class NewtonsoftJsonSerializer
     {
         private Newtonsoft.Json.JsonSerializer serializer;
 
@@ -76,11 +49,6 @@ namespace XboxWebApi.Common
                     return serializer.Deserialize<T>(jsonTextReader);
                 }
             }
-        }
-
-        public T Deserialize<T>(RestSharp.IRestResponse response)
-        {
-            return Deserialize<T>(response.Content);
         }
 
         public static NewtonsoftJsonSerializer Create(JsonNamingStrategy namingStrategy)

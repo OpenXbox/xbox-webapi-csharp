@@ -1,9 +1,8 @@
 using System;
-using XboxWebApi.Extensions;
 
 namespace XboxWebApi.Services.Model
 {
-    public class PresenceResponse : IStringable
+    public class PresenceResponse
     {
         public ulong Xuid;
         public PresenceState State;
