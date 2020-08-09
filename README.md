@@ -27,7 +27,7 @@ WindowsLiveResponse response = AuthenticationService.ParseWindowsLiveResponse(
 AuthenticationService authenticator = new AuthenticationService(response);
 
 string tokenFilePath = "tokens.json";
-bool success = await authenticator.Authenticate();
+bool success = await authenticator.AuthenticateAsync();
 if (!success)
     throw new Exception("Authentication failed!");
 
