@@ -59,6 +59,8 @@ namespace XboxWebApi.Cli
 
                     Console.WriteLine("Attempting authentication with Xbox Live...");
                     bool success = await authenticator.AuthenticateAsync();
+		    if (!success)
+                    	throw new Exception("Authentication failed!");
                     Console.WriteLine("Authentication succeeded");
 
                     if (!String.IsNullOrEmpty(args.TokenFilepath))
