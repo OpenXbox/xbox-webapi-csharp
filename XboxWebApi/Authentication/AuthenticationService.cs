@@ -82,21 +82,29 @@ namespace XboxWebApi.Authentication
             {
                 logger.LogTrace("AuthenticateAsync() called");
                 logger.LogTrace("AuthenticateAsync: Calling RefreshLiveTokenAsync");
+                WindowsLiveResponse windowsLiveTokens = null;
                 try
                 {
-                    WindowsLiveResponse windowsLiveTokens = await RefreshLiveTokenAsync(RefreshToken);
-                    logger.LogTrace("AuthenticateAsync: Constructing AccessToken");
+                    windowsLiveTokens = await RefreshLiveTokenAsync(RefreshToken);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "{}", ex.Message);
+                }
+                if (!(windowsLiveTokens == null))
+                {
                     if (!string.IsNullOrWhiteSpace(windowsLiveTokens.AccessToken))
                     {
+                        logger.LogTrace("AuthenticateAsync: Constructing AccessToken");
                         AccessToken = new AccessToken(windowsLiveTokens);
                     }
-                    logger.LogTrace("AuthenticateAsync: Constructing RefreshToken");
+                    
                     if (!string.IsNullOrWhiteSpace(windowsLiveTokens.RefreshToken))
                     {
+                        logger.LogTrace("AuthenticateAsync: Constructing RefreshToken");
                         RefreshToken = new RefreshToken(windowsLiveTokens);
                     }
                 }
-                catch {}
                 logger.LogTrace("AuthenticateAsync: Calling AuthenticateXASUAsync");
                 UserToken = await AuthenticateXASUAsync(AccessToken);
                 logger.LogTrace("AuthenticateAsync: Calling AuthenticateXSTSAsync");
