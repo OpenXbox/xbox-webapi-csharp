@@ -251,10 +251,11 @@ namespace XboxWebApi.Authentication
         /// Gets the OAUTH2 Windows Live authentication URL
         /// </summary>
         /// <returns>The ready-to-call authentication URL</returns>
-        public static string GetWindowsLiveAuthenticationUrl()
+        public static string GetWindowsLiveAuthenticationUrl(Model.WindowsLiveAuthenticationQuery queryParams = null)
         {
             logger.LogTrace("GetWindowsLiveAuthenticationUrl() called");
-            var parameters = new Model.WindowsLiveAuthenticationQuery();
+            var parameters = queryParams ?? new Model.WindowsLiveAuthenticationQuery();      
+            
             var url = QueryHelpers.AddQueryString(
                 "https://login.live.com/oauth20_authorize.srf",
                 parameters.GetQuery());
