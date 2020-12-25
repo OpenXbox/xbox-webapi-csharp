@@ -22,7 +22,7 @@ namespace XboxWebApi.Services
             HttpClient.BaseAddress = new Uri(baseUrl);
             
             HttpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue($"XBL3.0 x={Config.Userhash};{Config.xToken.Jwt}");
+                new AuthenticationHeaderValue("XBL3.0",$"x={Config.Userhash};{Config.xToken.Jwt}");
         }
     }
 }
