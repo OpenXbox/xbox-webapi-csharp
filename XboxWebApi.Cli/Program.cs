@@ -68,10 +68,10 @@ namespace XboxWebApi.Cli
                         success = await authenticator.DumpToJsonFileAsync(args.TokenFilepath);
                         if (!success)
                         {
-                            Console.WriteLine("Failed to dump tokens to {}", args.TokenFilepath);
+                            Console.WriteLine($"Failed to dump tokens to {args.TokenFilepath}");
                             return 2;
                         }
-                        Console.WriteLine("Tokens saved to {}", args.TokenFilepath);
+                        Console.WriteLine($"Tokens saved to {args.TokenFilepath}");
                     }
                 }
                 catch (Exception exc)
@@ -128,10 +128,10 @@ namespace XboxWebApi.Cli
                     success = await authenticator.DumpToJsonFileAsync(args.TokenFilepath);
                     if (!success)
                     {
-                        Console.WriteLine("Failed to dump tokens to {}", args.TokenFilepath);
+                        Console.WriteLine($"Failed to dump tokens to {args.TokenFilepath}");
                         return 2;
                     }
-                    Console.WriteLine("Tokens saved to {}", args.TokenFilepath);
+                    Console.WriteLine($"Tokens saved to {args.TokenFilepath}");
                 }
             }
             catch (Exception exc)
@@ -157,7 +157,7 @@ namespace XboxWebApi.Cli
             }
             catch (Exception exc)
             {
-                Console.WriteLine("Failed to refresh tokens, error: {}", exc);
+                Console.WriteLine($"Failed to refresh tokens, error: {exc}");
                 return 1;
             }
             return 0;
