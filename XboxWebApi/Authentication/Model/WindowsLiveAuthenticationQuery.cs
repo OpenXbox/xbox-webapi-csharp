@@ -13,7 +13,7 @@ namespace XboxWebApi.Authentication.Model
         public string Locale { get; internal set; }
 
         public WindowsLiveAuthenticationQuery(
-            string responseType = "token",
+            string responseType = WindowsLiveConstants.ResponseType,
             string scope = WindowsLiveConstants.Scope,
             string redirectUri = WindowsLiveConstants.RedirectUrl,
             string clientId = WindowsLiveConstants.ClientId,
